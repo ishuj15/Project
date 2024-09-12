@@ -1,13 +1,15 @@
-package com.controller;
+ package com.controller;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 import com.Model.Notices;
 import com.service.NoticesService;
 import com.util.Helper;
+import com.util.PrintInTable;
 import com.util.str;
 
 public class NoticesController {
@@ -26,8 +28,8 @@ public class NoticesController {
 				System.out.println(str.notNullNoticeTitle);
 			else
 				break;
-		}
-		while(true)
+		} 
+		while(true) 
 		{
 			System.out.println(str.noticeMessage);
 			
@@ -39,7 +41,7 @@ public class NoticesController {
 		}
 		
 		LocalDate currentDate = LocalDate.now();
-		while(true)
+		while(true) 
 		{
 			System.out.print(str.alertTargetRole);
 			 targetRole = scanner.nextLine().trim().toLowerCase();
@@ -53,7 +55,7 @@ public class NoticesController {
 		notice.setIdNotices(noticeId);
 		notice.setTitle(title);
 		notice.setMessage(message);
-		notice.setDate(java.sql.Date.valueOf(currentDate));
+		notice.setDate(currentDate.toString());
 		notice.setTargetRole(targetRole);
 
 		noticesService.addNotice(notice);
@@ -65,25 +67,12 @@ public class NoticesController {
 
 		if (notices == null || notices.isEmpty()) {
 			System.out.println("for role: " + role);
+			return;
 		} else {
-
-			System.out.printf("| %-5s | %-15s | %-30s | %-50s | %-15s |%n", "S.No", "Title", "Message", "Date", "Role");
-			System.out.println(
-					"--------------------------------------------------------------------------------------------------------------------"
-							+ "---------------------------------------------------------------");
-
-			int serialNumber = 1;
-			for (Notices notice : notices) {
-				System.out.printf("| %-5d | %-15s | %-30s | %-50s | %-15s |%n", serialNumber,
-
-						notice.getTitle(), notice.getMessage(), notice.getDate().toString(), notice.getTargetRole());
-				serialNumber++;
-			}
-			System.out.println(
-					"--------------------------------------------------------------------------------------------------------------------"
-							+ "---------------------------------------------------------------");
+			List<String> headers= Arrays.asList( "S.No", "Title", "Message", "Date");
+			List<String> fields= Arrays.asList(  "title", "message", "date");
+			PrintInTable.printTable(notices, headers, fields);
 		}
-
 	}
 
 	public void listNotices() throws SQLException, ClassNotFoundException {
@@ -91,28 +80,17 @@ public class NoticesController {
 
 		if (notices == null || notices.isEmpty()) {
 			System.out.println(str.noticeNotFound);
+			return;
 		} else {
-			System.out.printf("| %-5s | %-15s | %-30s | %-50s | %-15s |%n", "S.No", "Title", "Message", "Date", "Role");
-			System.out.println(
-					"--------------------------------------------------------------------------------------------------------------------"
-							+ "---------------------------------------------------------------");
-
-			int serialNumber = 1;
-			for (Notices notice : notices) {
-				System.out.printf("| %-5d | %-15s | %-30s | %-50s | %-15s |%n", serialNumber,
-
-						notice.getTitle(), notice.getMessage(), notice.getDate().toString(), notice.getTargetRole());
-				serialNumber++;
-			}
-			System.out.println(
-					"--------------------------------------------------------------------------------------------------------------------"
-							+ "---------------------------------------------------------------");
+			List<String> headers= Arrays.asList( "S.No", "Title", "Message", "Date", "Role");
+			List<String> fields= Arrays.asList(  "title", "message", "date", "targetRole");
+			PrintInTable.printTable(notices, headers, fields);
 		}
 	}
 
 	public void updateNotice() throws SQLException, ClassNotFoundException {
 		Notices notice = getNotice();
-
+ 
 		if (notice == null)
 			System.out.println(str.noticeNotFound);
 		else {
@@ -120,16 +98,7 @@ public class NoticesController {
 			
 			System.out.println(str.noticeUpdateList);
 			System.out.println(str.selectUpdate);
-			int choice = 0;
-			while (true) {
-				System.out.println(str.enterChoice);
-
-				choice = Helper.choiceInput();
-				if (Helper.checkLimit(5, choice))
-					break;
-				System.out.println(str.invalidInput);
-			}
-
+			int choice = Helper.choiceInput(5);
 			switch (choice) {
 			case 1: {
 				String title ;
@@ -198,16 +167,16 @@ public class NoticesController {
 	public Notices getNotice() throws ClassNotFoundException, SQLException {
 
 		List<Notices> notices = noticesService.getAllNotices();
+		if(notices.isEmpty()|| notices.equals(null))
+		{
+			System.out.println(str.noticeNotFound);
+
+			return null;
+		}
 		listNotices();
 		System.out.println(str.selectNotice);
-		int choice = 0;
-		while (true) {
-			System.out.println(str.enterChoice);
-			choice = Helper.choiceInput();
-			if (Helper.checkLimit(notices.size(), choice))
-				break;
-			System.out.println(str.invalidInput);
-		}
+		int choice = Helper.choiceInput(notices.size());
+			
 		return notices.get(choice - 1);
 	}
 }

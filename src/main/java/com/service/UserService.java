@@ -6,8 +6,6 @@ import com.Model.User;
 import com.dao.UserDAO;
 import com.util.Helper;
 
-
-
 public class UserService {
 	public  UserDAO userDAO = new UserDAO();
 	//private static Logger logger = FileLogging.getLogger(UserController.class);
@@ -23,9 +21,7 @@ public class UserService {
 
 	public User getUserByUserName(String userName) throws SQLException, ClassNotFoundException {
 		User user=userDAO.getUserByUserName(userName);
-		if(user==null)
-		return null;
-		else
+		
 			return user;
 	}
 

@@ -19,19 +19,11 @@ public class GuardMenu {
 
 	public void displayMenu(User user) throws SQLException, ClassNotFoundException, InterruptedException {
 		boolean loggedIn = true;
-		while (true) {
-			
+		while (true) { 
 			Helper.printFunction(str.guarrdMenu);
-
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(7, choice))
-					 break;	
-				 Helper.printFunction(str.invalidInput);
-			}
+			
+				int choice= Helper.choiceInput(7);
+			
 			switch (choice) {
 			case 1: {
 				loggedIn = guardController.userManagementObj.displayMenu(user);

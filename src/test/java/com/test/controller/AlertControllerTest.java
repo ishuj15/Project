@@ -7,8 +7,29 @@ import org.junit.jupiter.api.Test;
 class AlertControllerTest {
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void createAlertTest() {
 	}
+
+	@Test
+	void viewAlertByRoleTest() {
+	}
+
+	@Test
+	void listAlertsTest() {
+	}
+
+	@Test
+	void updateAlertTest() {
+	}
+
+	@Test
+	void deleteAlertTest() {
+	}
+
+	@Test
+	void getAlertTest() {
+	}
+	
+	
 
 }

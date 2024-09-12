@@ -23,14 +23,9 @@ public class ComplaintMenu {
 			//System.out.println("Complaint Menu");
 			Helper.printFunction(str.userComplaint);
 		
-			int choice = 0;
-			while (true) {
-				Helper.printFunction(str.enterChoice);
-				choice = Helper.choiceInput();
-				if (Helper.checkLimit(5, choice))
-					break;
-				Helper.printFunction(str.invalidInput);
-			}
+			
+				int choice = Helper.choiceInput(5);
+				
 
 			switch (choice) {
 			case 1: {

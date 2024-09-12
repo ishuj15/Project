@@ -23,15 +23,9 @@ public class NoticeMenu {
 
 			Helper.printFunction(str.userNotice);
 
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(4, choice))
-					 break;
-				 Helper.printFunction(str.invalidInput);
-			}
+			
+				int choice= Helper.choiceInput(4);
+				
 
 			switch (choice) {
 			case 1: {

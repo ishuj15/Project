@@ -20,15 +20,9 @@ public class VisitorMenu {
 	public boolean displayMenu(User user) throws SQLException, ClassNotFoundException {
 		while (true) {
 			Helper.printFunction(str.residentVisitorMenu);
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(8, choice))
-					 break;	
-				 Helper.printFunction(str.invalidInput);
-			}
+			
+				int choice= Helper.choiceInput(8);
+				
 			switch (choice) {
 			case 1: {
 				masterController.visitorController.createVisitor(user, "Aprroved");

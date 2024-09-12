@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.Model.User;
 import com.controller.MasterController;
+import com.controller.UserController;
 import com.util.Helper;
 import com.util.str;
 
@@ -21,19 +22,13 @@ public class VisitorMenu {
 	public boolean displayMenu(User user) throws ClassNotFoundException, SQLException {
 		while (true) {
 			Helper.printFunction(str.guardVisitorMenu);
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(5, choice))
-					 break;	
-				 Helper.printFunction(str.invalidInput);
-			}
+			
+				int choice= Helper.choiceInput(5);
+				
 
 			switch (choice) {
 			case 1: {
-				User user2 = masterController.userController.getUsernameList();
+				User user2 = UserController.getUsernameList();
 				
 				masterController.visitorController.createVisitor(user2, "Pending");
 				Helper.printFunction(str.requestSent);
@@ -41,7 +36,7 @@ public class VisitorMenu {
 				break;
 			}
 			case 2: {
-				User user2 = masterController.userController.getUsernameList();
+				User user2 = UserController.getUsernameList();
 				masterController.visitorController.verifyVisitor(user2);
 				break;
 			}
@@ -51,7 +46,7 @@ public class VisitorMenu {
 				return false;
 			case 5: {
 				scanner.close();
-				System.exit(0);
+				System.exit(0); 
 				return false;
 			}
 			default:

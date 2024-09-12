@@ -20,16 +20,9 @@ public class ComplaintManagementAdmin {
 	public boolean displayMenu(User user) throws ClassNotFoundException, SQLException {
 		while (true) {
 			Helper.printFunction(str.adminComplaint);
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(6, choice))
-					 break;	
-				 Helper.printFunction(str.invalidInput);
-			}
-
+			
+				int choice= Helper.choiceInput(6);
+			
 			switch (choice) {
 			case 1: {
 				complaintController.updateComplaint();

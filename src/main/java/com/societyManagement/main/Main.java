@@ -1,3 +1,4 @@
+
 package com.societyManagement.main;
 
 import java.sql.SQLException;
@@ -9,20 +10,12 @@ import com.util.str;
 
 public class Main {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-	
 		try (Scanner scanner = new Scanner(System.in)) {
 			while (true) {
-				
+				 
 				Helper.printFunction(str.welcomeMessage);
 				Helper.printFunction(str.mainMenu);
-				int choice = 0;
-				while (true) {
-					Helper.printFunction(str.enterChoice);
-	 				choice = Helper.choiceInput();
-					if (Helper.checkLimit(3, choice))
-						break;
-					Helper.printFunction(str.invalidInput);
-				}
+				int choice =  Helper.choiceInput(3);
 				switch (choice) {
 				case 1: {
 					UserController.createUser();
@@ -31,7 +24,7 @@ public class Main {
 				case 2: {
 					UserController.login();
 					break;
-				}
+				} 
 				case 3: {
 					scanner.close();
 					System.exit(0);
@@ -44,6 +37,5 @@ public class Main {
 		} catch (Exception e) {
 			Helper.printFunction(str.invalidInput);
 		}
-
 	}
 }

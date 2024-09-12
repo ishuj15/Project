@@ -3,74 +3,89 @@ package com.util;
 public class str {
 	public static String account = "Manage Account";
 	public static String accountManagementAdmin ="""
-			1) Add User
-			2) Delete User
-			3) View list of users
-			4) View Profile by userName
-			5) Update User
-			6) Back to previous menu
-			7) Log out
-			8) Exit
-			""";
+*************************************************************************************************************************
+							Manage Account  Menu
+*************************************************************************************************************************
+1) Add User
+2) Delete User
+3) View list of users
+4) View Profile by userName
+5) Update User
+6) Back to previous menu
+7) Log out
+8) Exit""";
 	public static String addUser = "Add User";
 	public static String admin= "admin";
 	public static String adminAlert = """
-			1) Add Alert
-			2) Delete Alert
-			3) View Alerts
-			4) Update Alert
-			5) Back to previous menu
-			6) Log out
-			7) Exit
-			
-			"""; 
+*************************************************************************************************************************
+							Complaint Menu
+*************************************************************************************************************************
+1) Add Alert
+2) Delete Alert
+3) View Alerts
+4) Update Alert
+5) Back to previous menu
+6) Log out
+7) Exit"""; 
 	public static String adminAttendance = """
-			1) View Attendance
-			2) View Attendnace by Id
-			3) Update
-			4) Exit""";
+*************************************************************************************************************************
+							Attendance Menu
+*************************************************************************************************************************
+1) View Attendance
+2) View Attendnace by Id
+3) Update
+4) Exit""";
 	public static String adminComplaint = """
-			1) Update Complaint
-			2) Delete Complaint
-			3) View list of Complaint
-			4) Back to previous menu
-			5) Log out
-			6) Exit
-			""";
+*************************************************************************************************************************
+							Complaint Menu
+*************************************************************************************************************************
+1) Update Complaint
+2) Delete Complaint
+3) View list of Complaint
+4) Back to previous menu
+5) Log out
+6) Exit""";
 	public static String adminMenu ="""
-			1) Manage User
-			2) Notices
-			3) Alerts
-			4) Visitor
-			5) Services
-			6) Complaints
-			7) Back to previous menu
-			8) Log out
-			9) Exit
-			""";
+*************************************************************************************************************************
+							Home Menu
+*************************************************************************************************************************
+1) Manage User
+2) Notices
+3) Alerts
+4) Visitor
+5) Services
+6) Complaints
+7) Log out
+8) Exit""";
 	public static String adminNotice = """
-			1) Add Notice
-			2) Delete Notice
-			3) View list of Notices
-			4) Update Notice
-			5) Back to previous menu
-			6) Log out
-			7) Exit
-			""";
+*************************************************************************************************************************
+							Notices Menu
+*************************************************************************************************************************
+1) Add Notice
+2) Delete Notice
+3) View list of Notices
+4) Update Notice
+5) Back to previous menu
+6) Log out
+7) Exit""";
 	public static String adminService = """
-			1) View Services
-			2) Delete Services
-			3) Back to previous menu
-			4) Log out
-			5) Exit
-			""";
+*************************************************************************************************************************
+							Services Menu
+*************************************************************************************************************************
+1) View Services
+2) Delete Services
+3) Back to previous menu
+4) Log out
+5) Exit""";
 	public static String adminVisitor = """
-			1) View list of Visitor
-			2) Delete visitor
-			3) Back to previous menu
-			4) Log out
-			5) Exit
-			""";
+*************************************************************************************************************************
+							Visitor Menu
+*************************************************************************************************************************
+1) View list of Visitor
+2) Delete visitor
+3) Back to previous menu
+4) Log out
+5) Exit""";
 	public static String alert = "Alerts";
 	public static String  alertCreatedSuccessfully= "Alert created successfully!";
 	public static String  alertDatePrint="Date: ";
@@ -83,10 +98,13 @@ public class str {
 	public static String alertUpdated = "Alert updated successfully!";
 	public static String alertUpdatefield="Select field that needs to be updated";
 	public static String  alertUpdateList="""
-			1) Message
-			2) Target Role
-			3) Back to previous menu
-			4) Exit""";
+*************************************************************************************************************************
+							Update List
+*************************************************************************************************************************
+1) Message
+2) Target Role
+3) Back to previous menu
+4) Exit""";
 	public static String attendance = "Attendance";
 	public static String complaint = "Complaints";
 	public static String complaintCreated="Complaint created successfully!";
@@ -96,10 +114,12 @@ public class str {
 	public static String   complaintTobeUpdated= "Select field  that you want to update";
 	public static String complaintUpdated = "Complaint updated successfully!";
 	public static String complaintUpdateList="""
-				1) Status
-				2) Back to previous menu
-				3) Exit 
-			""" ;
+*************************************************************************************************************************
+							Update List
+*************************************************************************************************************************
+1) Status
+2) Back to previous menu
+3) Exit """ ;
 	public static String deleteUser = "Delete User";
 	public static String  enterAddress=  "Enter address: ";
 	public static String enterChoice = "Enter your choice";
@@ -117,37 +137,47 @@ public class str {
 	public static String exit = "Exit";
 	public static String guard= "guard";
 	public static String guardVisitorMenu="""
-			1) Add Visitor
-			2) Verify Visitor
-			3) Back to previous menu
-			4) Log out
-			5) Exit
+*************************************************************************************************************************
+							Visitor Menu
+*************************************************************************************************************************
+1) Add Visitor
+2) Verify Visitor
+3) Back to previous menu
+4) Log out
+5) Exit
 			""";
 	public static String  guarrdMenu="""
-			1) Manage Account
-			2) Alerts
-			3) Notices
-			4) Visitor
-			5) Complaints
-			6) Log out
-			7) Exit
-			""";
-	public static String invalidInput="Invalid User, Please try again";
+*************************************************************************************************************************
+							Home Menu
+*************************************************************************************************************************
+1) Manage Account
+2) Alerts
+3) Notices
+4) Visitor
+5) Complaints
+6) Log out
+7) Exit""";
+	public static String invalidInput="Invalid input, Please try again";
 	public static String invalidUserNameOrPassword = "Invalid username or password. Please try again.";
 	public static String loginSuccessful= "Login successful! Welcome, ";
 	public static String logout = "Log out";
 	public static 	String mainMenu = """
-			1) Register new  Account
-			2) Login
-			3)  Exit""";
+*************************************************************************************************************************
+							Main Menu
+*************************************************************************************************************************
+1) Register new  Account
+2) Login
+3) Exit""";
 	public static String manageAccount ="""
-			1) Delete Profile
-			2) Update Profile
-			3) View Profile
-			4) Back to previous menu
-			5) Log out
-			6) Exit
-			""";
+*************************************************************************************************************************
+							Manage User Menu
+*************************************************************************************************************************
+1) Delete Profile
+2) Update Profile
+3) View Profile
+4) Back to previous menu
+5) Log out
+6) Exit""";
 	public static String  NoadminDeletion= "You can't delete admin";
 	public static String noListOfUser= "No List of users found" ;
 	public static String notice = "Notices";
@@ -158,12 +188,14 @@ public class str {
 	public static String noticeTitle="Enter Title: " ;
 	public static String  noticeUpdatedSuccessfully= "Notice updated successfully!" ;
 	public static String noticeUpdateList ="""
-			1) Title
-			2) Message
-			3) Target Role
-			4) Back to previous menu
-			5) Exit
-			""";
+*************************************************************************************************************************
+							Update List
+*************************************************************************************************************************
+1) Title
+2) Message
+3) Target Role
+4) Back to previous menu
+5) Exit""";
 	public static String notNullComplaint ="Complaint can't be null, Try again";
 	public static String notNullMessage= " Can't accept empty message, Try again";
 	public static String notNullNoticeMessage= "Message can't be null, Try again";
@@ -174,36 +206,43 @@ public class str {
 	public static String  requestSent="Request sent to resident";
 	public static String resident = "resident";
 	public static String residentMenu= """
-			1) Manage Account
-			2) Notices
-			3) Alerts
-			4) Visitor
-			5) Services
-			6) Complaints
-			7) Log out
-			8) Exit
-			""";
+*************************************************************************************************************************
+							Home Menu
+*************************************************************************************************************************
+1) Manage Account
+2) Notices
+3) Alerts
+4) Visitor
+5) Services
+6) Complaints
+7) Log out
+8) Exit""";
 	public static String residentServices ="""
-			1) Add Services
-			2) View Your Services
-			3) Update Services
-			4) Delete Services
-			5) List of services
-			6) Back to previous menu
-			7) Log out
-			8) Exit
-			""";
+*************************************************************************************************************************
+							Services Menu
+*************************************************************************************************************************
+1) Add Services
+2) View Your Services
+3) Update Services
+4) Delete Services
+5) List of services
+6) Back to previous menu
+7) Log out
+8) Exit
+""";
 	
-	public static String residentVisitorMenu="""
-			1) Add Visitor
-			2) View Visitor
-			3) Pending Requests
-			4) Update Visitor
-			5) Delete Visitor
-			6) Back to previous menu
-			7) Log out
-			8) Exit
-			""";
+	public static String residentVisitorMenu=""" 
+*************************************************************************************************************************
+							Visitor Menu
+*************************************************************************************************************************
+1) Add Visitor
+2) View Visitor
+3) Pending Requests
+4) Update Visitor
+5) Delete Visitor
+6) Back to previous menu
+7) Log out
+8) Exit""";
 	public static String selectAlert= "Select  alert";
 	public static  String selectComplaint= "Select Complaint ";
 	public static String selectNotice = "Select notice" ;
@@ -220,46 +259,61 @@ public class str {
 	public static String serviceToBeUpdated = "Select that needs to be updated";
 	public static String  serviceUpadtedSuccessfully = "Service updated successfully!";
 	public static String  serviceUpdateList="""
-			1) Service Name
-			2) Description
-			3) Status
-			4) Back to previous menu
-			5) Exit""" ;
+*************************************************************************************************************************
+							Update List
+*************************************************************************************************************************
+1) Service Name
+2) Description
+3) Status
+4) Back to previous menu
+5) Exit""" ;
 	public static String updateUser = "Update User";
 	public static String user = "Manage User";
 	public static String  userAlert="""
-			1) View Alerts
-			2) Back to previous menu
-			3) Log out
-			4) Exit
+*************************************************************************************************************************
+							Alert Menu
+*************************************************************************************************************************
+1) View Alerts
+2) Back to previous menu
+3) Log out
+4) Exit
 			""";
 	public static String userComplaint ="""
-			1) Add Complaint
-			2) View Complaint
-			3) Back to previous menu
-			4) Log out
-			5) Exit
+*************************************************************************************************************************
+							Complaint Menu
+*************************************************************************************************************************
+1) Add Complaint
+2) View Complaint
+3) Back to previous menu
+4) Log out
+5) Exit
 			""";
 	public static String userCreatedSuccessfully = "User created successfully!";
 	public static String  UserdeletedSuccessfully= "User deleted successfully!";
 	public static String  userNameTaken= "username already taken, please try again" ;
 	public static String userNotFound= "User not found!";
 	public static String userNotice ="""
-			1) View Notices
-			2) Back to previous menu
-			3) Log out
-			4) Exit
-			""";
+*************************************************************************************************************************
+							Notices Menu
+*************************************************************************************************************************
+1) View Notices
+2) Back to previous menu
+3) Log out
+4) Exit
+""";
 	public static String userUpdatedSuccessfully= "User updated successfully";
 	public static String userUpdateList = """
-			1) UserName
-			2) Password
-			3) Phone Number
-			4) Email
-			5) Address
-			6) Back to previous menu
-			7) Exit
-			""";
+*************************************************************************************************************************
+							Update List
+*************************************************************************************************************************
+1) UserName
+2) Password
+3) Phone Number
+4) Email
+5) Address
+6) Back to previous menu
+7) Exit
+""";
 	public static String viewListByUserName = "View Profile by userName";
 	public static String viewListOfUser = "View list of users";
 	public static String visitor = "Visitor";
@@ -286,13 +340,16 @@ public class str {
 	public static String whichVisitorToDelete = "Enter which visitor to delete" ;
 	public static String visitorUpdatedSuccessfully="Vistor updated" ;
 	public static String visitorUpdateList="""
-			1) Name
-			2) Contact Number
-			3) Arrival Date
-			4) Arrival Time
-			5) Departure Date
-			6) Departure time
-			7) Exit""" ;
+*************************************************************************************************************************
+							Update List
+*************************************************************************************************************************
+1) Name
+2) Contact Number
+3) Arrival Date
+4) Arrival Time
+5) Departure Date
+6) Departure time
+7) Exit""" ;
 	public static String visitorUpdateOption= "Which field do you want to update" ;
 	public static String selectVisitor ="Enter which visitor to update" ;
 
@@ -311,7 +368,7 @@ public class str {
 	public static String userName =  "userName";
 	public static String password ="password" ;
 
-	public static String loggingout = "Logging out, Please wait";
+	public static String loggingout = "Logging out,Please wait";
 	public static String validTargetRole= "Enter a valid target role";
 	//public static String = ;
 //	public static String = ;

@@ -1,14 +1,25 @@
 package com.Model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class Complaint {
+public class Complaint implements ModelInterface {
 	private String idComplaint;
 	private String userId;
 	private String description;
 	private Date date;
 	private String status;
-
+	 @Override
+	    public List<String> toRow(List<String> fields) {
+		 List<String> row= new ArrayList<>();
+		 if(fields.contains("description")) row.add(description);
+		 if(fields.contains("date")) row.add(date.toString());
+		 if(fields.contains("status")) row.add(status);
+		 return row;
+	       
+	    }
 	// Getters and Setters
 	public String getIdComplaint() {
 		return idComplaint;
@@ -49,4 +60,5 @@ public class Complaint {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 }

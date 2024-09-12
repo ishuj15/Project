@@ -12,6 +12,15 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.UUID;
 
+enum targetRole{
+	GUARD, RESIDENT, ALL;	
+}
+enum complaintStatus{
+	PENDING, RESOLVED, UNRESOLVED;
+}
+enum Roles{
+	RESIDENT,GUARD;
+}
 public class Helper {
 	
 	public static boolean checkLimit(int limit, int choice) {
@@ -19,10 +28,10 @@ public class Helper {
 			return true;
 		else
 			return false;
-	}
+	} 
 
 	public static String hashPassword(String password) {
-
+ 
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			byte[] hashBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
@@ -68,11 +77,35 @@ public class Helper {
 	}
 
 	public static boolean isUserRoleValid(String userRole) {
-				return userRole.equals("resident") || userRole.equals("guard");
+		if(userRole==null)
+			return false;
+		else
+		{
+			String userRoleUpperCase= userRole.toUpperCase().trim();
+			for(Roles role: Roles.values())
+			{
+				if(role.name().equals(userRoleUpperCase))
+					return true;		
+			}
+			return false;
+		}
 	}
 	public static boolean ComplaintStatus(String status)
 	{
-		return status.equals("resolved") || status.equals(str.pending) || status.equals("unresolved");
+		if(status==null)
+		{
+			return false;
+		}
+		else
+		{
+			String statusUpperCase= status.toUpperCase().trim();
+			for(complaintStatus Cstatus: complaintStatus.values())
+			{
+				if(Cstatus.name().equals(statusUpperCase))
+				return true;
+			}
+			return false;
+		}
 	}
 	public static boolean isEmailValid(String email) {
 	
@@ -172,15 +205,24 @@ public class Helper {
 		}
 	}
 
-	public static int choiceInput() {
+	public static int choiceInput(int limit) {
 		Scanner scanner = new Scanner(System.in);
-		while (!scanner.hasNextInt()) {
-			System.out.println(str.invalidInput);
-			scanner.next();
-			System.out.print(str.enterChoice);
-		}
-		int value = scanner.nextInt();
-		return value;
+		while (true) {
+			System.out.println(str.enterChoice);
+
+            String input = scanner.nextLine();
+            try {
+                int value = Integer.parseInt(input);
+                if(value<=limit && value>0)
+                return value;
+                else
+                	System.out.println(str.invalidInput);
+
+            } catch (NumberFormatException e) {
+                System.out.println(str.invalidInput);
+            } 
+        }
+
 	}
 
 	public static void printFunction(String string) {
@@ -194,8 +236,18 @@ public class Helper {
 	    return true;
 	}
 	public  static boolean isValidTarget(String target) {
-		
-		return target.equals("gaurd")|| target.equals("all") || target.equals("resident");
+		if(target==null)
+			return false;
+		else
+		{
+			String targetUppercase=target.toUpperCase();
+			for(targetRole role:targetRole.values())
+			{
+				if(role.name().equals(targetUppercase))
+					return true;
+			}
+			return false;
+		}
 	}
 	
 }

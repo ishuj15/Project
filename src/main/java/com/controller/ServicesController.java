@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,6 +9,7 @@ import com.Model.Services;
 import com.Model.User;
 import com.service.ServicesService;
 import com.util.Helper;
+import com.util.PrintInTable;
 import com.util.str;
 
 public class ServicesController {
@@ -23,7 +25,7 @@ public class ServicesController {
 		System.out.print(str.enterServiceDescription);
 		String description = scanner.nextLine();
 		System.out.print(str.enterCurrentStatus);
-		String status = scanner.nextLine();
+		String status = scanner.nextLine(); 
 
 		Services service = new Services();
 		service.setIdServices(Helper.generateUniqueId());
@@ -33,94 +35,35 @@ public class ServicesController {
 		service.setStatus(status);
 		servicesService.addService(service);
 		System.out.println(str.serviceCreatedSuccessfully);
-	}
+	} 
 
 	public void viewService(String idUser) throws SQLException, ClassNotFoundException {
 
-		List<Services> services = servicesService.getServiceById(idUser);
-		if (services.isEmpty())
+	 	List<Services> services = servicesService.getServiceById(idUser);
+		if (services.isEmpty() || services==null) {
 			System.out.println(str.serviceNotFound);
+		return;}
 		else {
-			System.out.println("---------------------------------------------------------------"
-					+ "------------------------------------------------------");
-			System.out.printf("| %-5s | %-15s | %-20s | %-30s | %-10s |%n", "No.", "Username", "Service Name",
-					"Description", "Status");
-			System.out.println("---------------------------------------------------------------"
-					+ "------------------------------------------------------");
-			int serialNumber = 1;
-			for (Services service : services) {
-				User user = UserController.userService.getUserById(service.getUserId());
-				System.out.printf("| %-5d | %-15s | %-20s | %-30s | %-10s |%n", serialNumber++, user.getUserName(), // Display
-																													// the
-																													// username
-						service.getServiceName(), service.getDescription(), service.getStatus());
-			}
-			System.out.println("---------------------------------------------------------------"
-					+ "------------------------------------------------------");
+			List<String> headers= Arrays.asList( "S.No", "Service Name","Description", "Status");
+			List<String> fields= Arrays.asList(  "serviceName", "description", "status");
+			PrintInTable.printTable(services, headers, fields);
 
 		}
 	}
 
 	public void listServices() throws SQLException, ClassNotFoundException {
 		List<Services> services = servicesService.getAllServices();
-		if (services.equals(null))
+		if ( services.isEmpty() ||services.equals(null)) {
 			System.out.println(str.serviceNotFound);
+			return;
+		}
 		else {
-			System.out.println("---------------------------------------------------------------"
-					+ "------------------------------------------------------");
-			System.out.printf("| %-5s | %-15s | %-20s | %-30s | %-10s |%n", "No.", "Username", "Service Name",
-					"Description", "Status");
-			System.out.println("---------------------------------------------------------------"
-					+ "------------------------------------------------------");
-
-			int serialNumber = 1;
-			for (Services service : services) {
-				User user = UserController.userService.getUserById(service.getUserId());
-				System.out.printf("| %-5d | %-15s | %-20s | %-30s | %-10s |%n", serialNumber++, user.getUserName(), // Display
-																													// the
-																													// username
-						service.getServiceName(), service.getDescription(), service.getStatus());
-			}
-			System.out.println("---------------------------------------------------------------"
-					+ "------------------------------------------------------");
+			List<String> headers= Arrays.asList( "S.No", "Service Name","Description", "Status");
+			List<String> fields= Arrays.asList(  "serviceName", "description", "status");
+			PrintInTable.printTable(services, headers, fields);
 
 		}
 	}
-//    	 int maxServiceNameLength = "Service Name".length();
-//    	    int maxDescriptionLength = "Description".length();
-//    	    
-//    	    for (Services service : services) {
-//    	        maxServiceNameLength = Math.max(maxServiceNameLength, service.getServiceName().length());
-//    	        maxDescriptionLength = Math.max(maxDescriptionLength, service.getDescription().length());
-//    	    }
-//
-//    	    // Calculate the format strings based on max lengths
-//    	    String headerFormat = "| %-5s | %-" + maxServiceNameLength + "s | %-" + maxDescriptionLength + "s | %-10s |%n";
-//    	    String rowFormat = "| %-5d | %-" + maxServiceNameLength + "s | %-" + maxDescriptionLength + "s | %-10s |%n";
-//
-//    	    // Calculate the total width of the table for the horizontal line
-//    	    int tableWidth = 12 + maxServiceNameLength + maxDescriptionLength + 15; // 12 = 5 (No.) + 2 spaces + 2 vertical bars + 3 spaces, 15 = 10 (Status) + 5 (spaces and vertical bars)
-//    	    
-//    	    // Print the starting horizontal line
-//    	    System.out.println("-".repeat(tableWidth));
-//
-//    	    // Print table headers
-//    	    System.out.printf(headerFormat, "No.", "Service Name", "Description", "Status");
-//    	    System.out.println("-".repeat(tableWidth));  // Adjust separator line based on column widths
-//
-//    	    // Print each service with a serial number
-//    	    int serialNumber = 1;
-//    	    for (Services service : services) {
-//    	        System.out.printf(rowFormat, 
-//    	                          serialNumber++, 
-//    	                          service.getServiceName(), 
-//    	                          service.getDescription(), 
-//    	                          service.getStatus());
-//    	    }
-//
-//    	    // Print ending horizontal line
-//    	    System.out.println("-".repeat(tableWidth));
-	// }
 
 	public void updateService(String idUser) throws SQLException, ClassNotFoundException {
 		Scanner scanner = new Scanner(System.in);
@@ -133,29 +76,16 @@ public class ServicesController {
 		}
 		viewService(idUser);
 		System.out.println(str.selectServiceToModify);
-		int choice = 0;
-		while (true) {
-			System.out.println(str.enterChoice);
-
-			choice = Helper.choiceInput();
-			if (Helper.checkLimit(service.size(), choice))
-				break;
-			System.out.println(str.invalidInput);
-		}
+		int choice = Helper.choiceInput(service.size());
+			
 		Services selectedService = service.get(choice - 1);
 		if (selectedService.equals(null))
 			System.out.println(str.serviceNotFound);
 		else {
 			System.out.println(str.serviceUpdateList);
 			System.out.println(str.serviceToBeUpdated);
-			int choice2 = 0;
-			while (true) {
-				System.out.println(str.enterChoice);
-				choice = Helper.choiceInput();
-				if (Helper.checkLimit(4, choice2))
-					break;
-				System.out.println(str.invalidInput);
-			}
+			int choice2  = Helper.choiceInput(4);
+				
 			switch (choice2) {
 			case 1: {
 				System.out.print(str.enterServiceName);
@@ -204,16 +134,9 @@ public class ServicesController {
 
 		System.out.println(str.selectServiceThatNeedToBeDeleted);
 		viewService(idUser);
-		int choice = 0;
-		while (true) {
-			System.out.println(str.enterChoice);
-
-			choice = Helper.choiceInput();
-			if (Helper.checkLimit(service.size(), choice))
-				break;
-			System.out.println(str.invalidInput);
-
-		}
+		
+			int choice = Helper.choiceInput(service.size());
+			
 
 		Services selectedService = service.get(choice - 1);
 
@@ -238,16 +161,7 @@ public class ServicesController {
 		}
 		listServices();
 		System.out.println(str.selectService);
-		int choice = 0;
-		while (true) {
-			System.out.println(str.enterChoice);
-
-			choice = Helper.choiceInput();
-			if (Helper.checkLimit(services.size(), choice))
-				break;
-			System.out.println(str.invalidInput);
-
-		}
+			int choice = Helper.choiceInput(services.size());
 
 		return services.get(choice - 1);
 	}

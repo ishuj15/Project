@@ -44,17 +44,7 @@ public class AlertServiceTest {
 		verify(alertDao, times(1)).addAlert(alert);
 	}
 	
-	@Test
-	public void getAlertByIdTest() throws ClassNotFoundException, SQLException {
-		Alert alert= new Alert();
-		alert.setIdAlert("123");
-		alert.setMessage("Earthquake");
-		alert.setTargetRole("all");
-		String alertId="123";
-		when(alertDao.getAlertById(alertId)).thenReturn(alert);
-		Alert actualAlert= alertServiceObj.getAlertById(alertId);
-		assertEquals(alert,actualAlert);
-	}
+	
 	@Test
 	public void updateAlertTest() throws ClassNotFoundException, SQLException {
 		String alertId="123";

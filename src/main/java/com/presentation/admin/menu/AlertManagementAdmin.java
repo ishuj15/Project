@@ -19,21 +19,13 @@ public class AlertManagementAdmin {
 	public boolean displayMenu() throws SQLException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 
-		while (true) {
+		while (true) { 
 			Helper.printFunction(str.adminAlert);
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(7, choice))
-					 break;	
-				 Helper.printFunction(str.invalidInput);
-				 System.out.println("Invalid User, Please try again");
-			}
+			
+				int choice= Helper.choiceInput(7);
 
 			switch (choice) {
-			case 1: {
+			case 1: { 
 				alertController.createAlert();
 				break;
 			}

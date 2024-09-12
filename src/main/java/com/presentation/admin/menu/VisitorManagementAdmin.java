@@ -21,15 +21,9 @@ public class VisitorManagementAdmin {
 		while (true) {
 
 			Helper.printFunction(str.adminVisitor);
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(5, choice))
-					 break;	
-				 Helper.printFunction(str.invalidInput);
-			}
+			
+				int choice= Helper.choiceInput(5);
+			
 
 			switch (choice) {
 			case 1: {

@@ -3,6 +3,7 @@ package com.controller;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ import com.Model.User;
 import com.Model.Visitor;
 import com.service.VisitorService;
 import com.util.Helper;
+import com.util.PrintInTable;
 import com.util.str;
 
 public class VisitorController {
@@ -26,7 +28,7 @@ public class VisitorController {
 		Date date = new Date(System.currentTimeMillis());
 		System.out.print(str.visitorName);
 		String name = scanner.nextLine();
-		while (true) {
+		while (true) { 
 			System.out.print(str.enterVisitorContact);
 			contact = scanner.nextLine();
 			if (Helper.isPhoneNumberValid(contact))
@@ -104,26 +106,13 @@ public class VisitorController {
 			System.out.println(str.visitorNotFound);
 			return;
 		} else {
-			System.out.printf("%-5s %-20s %-15s %-15s %-20s %-20s %-20s %-15s %-15s\n", "S.No", "Name", "Contact",
-					"Arrival Date", "Purpose", "Arrival Time", "Departure Time", "Departure Date", "Approval Req");
-			System.out.println(
-					"------------------------------------------------------------------------------------------------------------------"
-							+ "------------------------------------------------------");
-			int serialNumber = 1;
-			for (Visitor visitor : visitors) {
-				System.out.printf("%-5d %-20s %-15s %-15s %-20s %-20s %-20s %-15s %-15s\n", serialNumber++,
-						visitor.getName(), visitor.getContactNo(), visitor.getDate(), visitor.getPurpose(),
-						visitor.getArrivalTime(), visitor.getDepartureTime(), visitor.getDep_date(),
-						visitor.getStatus());
-
-			}
-			System.out.println(
-					"------------------------------------------------------------------------------------------------------------------"
-							+ "------------------------------------------------------");
+			
+			List<String> headers=  Arrays.asList("S.No", "Name", "Contact", "Purpose","Arrival Date", "Arrival Time", "Departure Date",  "Departure Time","Approval Req");
+			List<String> fields = Arrays.asList("name","contactNo","purpose","Arrival date","arrivalTime","departure date","departureTime","Status");
+			PrintInTable.printTable(visitors, headers,fields);
 		}
 		
 	}
-
 
 	public void listVisitors() throws SQLException, ClassNotFoundException {
 		List<Visitor>visitors=  visitorService.getAllVisitors();
@@ -131,6 +120,9 @@ public class VisitorController {
 			System.out.println(str.visitorNotFound);
 
 		} else {
+//			List<String> headers=  Arrays.asList("S.No", "Name", "Contact","Arrival Date", "Purpose", "Arrival Time", "Departure Time", "Departure Date", "Approval Req");
+//			List<String> fields = Arrays.asList("name","purpose","arrivalTime","departureTime","Arrival date","departure date","Status","contactNo");
+//			PrintInTable.printTable(visitors, headers,fields);
 			System.out.printf("%-5s %-10s %-15s %-15s %-20s %-20s %-20s %-15s %-15s %-15s\n", "S.No", "Name", "Contact",
 					"Arrival Date", "Purpose", "Arrival Time", "Departure Time", "Departure Date", "Status","UserName");
 			System.out.println(
@@ -160,31 +152,15 @@ public class VisitorController {
 		}
 		System.out.println(str.selectVisitor);
 		viewVisitor(userId);
-		int choice = 0;
-		while (true) {
-			System.out.println(str.enterChoice);
-
-			choice = Helper.choiceInput();
-			if (Helper.checkLimit(visitors.size(), choice))
-				break;
-			System.out.println(str.invalidInput);
-		}
-
+		
+			int choice = Helper.choiceInput(visitors.size());
 		Visitor selectedVisitor = visitors.get(choice - 1);
 		String visitorId = selectedVisitor.getIdVisitor();
 		
 		System.out.print(str.visitorUpdateList);
 		System.out.println(str.visitorUpdateOption);
-		int choice2 = 0;
-		while (true) {
-			System.out.println(str.enterChoice);
-
-			choice2 = Helper.choiceInput();
-			if (Helper.checkLimit(7, choice2))
-				break;
-			System.out.println(str.invalidInput);
-
-		}
+		int choice2 = Helper.choiceInput(7);
+			
 		String ColumnToUpdate=null,NewValue=null;
 		switch (choice2) {
 		case 1: {
@@ -266,16 +242,8 @@ public class VisitorController {
 		}
 		
 		viewVisitor(userId);
-		int choice = 0;
-		while (true) {
-			System.out.println(str.whichVisitorToDelete);
-			choice = Helper.choiceInput();
-			if (Helper.checkLimit(visitors.size(), choice))
-				break;
-			System.out.println(str.invalidInput);
-
-		}
-
+		
+			int choice = Helper.choiceInput(visitors.size());
 		Visitor selectedVisitor = visitors.get(choice - 1);
 		String visitorId = selectedVisitor.getIdVisitor();
 		visitorService.deleteVisitor(visitorId);
@@ -291,14 +259,8 @@ public class VisitorController {
 		else {
 			viewVisitor(user.getIdUser());
 			System.out.println(str.selectVisitorToVerify);
-			int choice = 0;
-			while (true) {
-				System.out.println(str.enterChoice);
-				choice = Helper.choiceInput();
-				if (Helper.checkLimit(visitors.size(), choice))
-					break;
-				System.out.println(str.invalidInput);
-			}
+				int choice = Helper.choiceInput(visitors.size());
+				
 			Visitor selectedVisitor = visitors.get(choice - 1);
 			System.out.println(selectedVisitor.getStatus());
 		}
@@ -310,54 +272,27 @@ public class VisitorController {
 				System.out.println(str.visitorNotFound);
 				return;
 			} else {
-				System.out.printf("%-5s %-20s %-15s %-15s %-20s %-20s %-20s %-15s %-15s\n", "S.No", "Name", "Contact",
-						"Arrival Date", "Purpose", "Arrival Time", "Departure Time", "Departure Date", "Status");
-				System.out.println(
-						"------------------------------------------------------------------------------------------------------------------"
-								+ "------------------------------------------------------");
-				int serialNumber = 1;
-				for (Visitor visitor : visitors) {
-					System.out.printf("%-5d %-20s %-15s %-15s %-20s %-20s %-20s %-15s %-15s\n", serialNumber++,
-							visitor.getName(), visitor.getContactNo(), visitor.getDate(), visitor.getPurpose(),
-							visitor.getArrivalTime(), visitor.getDepartureTime(), visitor.getDep_date(),
-							visitor.getStatus());
-
-				}
-				System.out.println(
-						"------------------------------------------------------------------------------------------------------------------"
-								+ "------------------------------------------------------");
+				
+				List<String> headers=  Arrays.asList("S.No", "Name", "Contact","Purpose","Arrival Date",  "Arrival Time",  "Departure Date","Departure Time", "Approval Req");
+				List<String> fields = Arrays.asList("name","contactNo","purpose","Arrival date","arrivalTime","departure date","departureTime","Status");
+				PrintInTable.printTable(visitors, headers,fields);
 				System.out.println(str.selectToDenyOrApprove);
-				int choice = 0;
-				while (true) {
-					System.out.println(str.enterChoice);
-
-					choice = Helper.choiceInput();
-					if (Helper.checkLimit(visitors.size(), choice))
-						break;
-					System.out.println(str.invalidInput);
-				}
-
+				
+					int choice = Helper.choiceInput(visitors.size()); 
+					
 				Visitor selectedVisitor = visitors.get(choice - 1);
 				String visitorId = selectedVisitor.getIdVisitor();
 				
 				System.out.println(str.selectToApprove);
 				System.out.println(str.selectToDeny);
-				int choice2 = 0;
-				while (true) {
-					System.out.println(str.enterChoice);
-
-					choice2 = Helper.choiceInput();
-					if (Helper.checkLimit(2, choice2))
-						break;
-					System.out.println(str.invalidInput);
-				}
+				
+					int choice2 = Helper.choiceInput(2);
+					
 				if (choice2 == 1) {
 					visitorService.updateVisitor(visitorId, "approvalReq",str.approved );
-					//visitorService.updateApprovalStatus(visitorId, );
 					System.out.println(str.requestApproved);
 				} else {
 					visitorService.updateVisitor(visitorId, "approvalReq",str.rejected );
-					//visitorService.updateApprovalStatus(visitorId, str.rejected);
 					System.out.println(str.requestDenied);
 				}
 			}	 
@@ -370,15 +305,7 @@ public class VisitorController {
 				return ;
 			}
 			listVisitors();
-			
-			int choice = 0;
-			while (true) {
-				System.out.println(str.selectVisitorToDelete);
-				choice = Helper.choiceInput();
-				if (Helper.checkLimit(visitors.size(), choice))
-					break;
-				System.out.println(str.invalidInput);
-			}
+				int choice = Helper.choiceInput(visitors.size());
 			Visitor selectedVisitor = visitors.get(choice - 1);
 			String visitorId=selectedVisitor.getIdVisitor();
 			visitorService.deleteVisitor(visitorId);

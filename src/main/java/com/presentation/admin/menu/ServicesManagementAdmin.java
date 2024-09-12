@@ -17,22 +17,14 @@ public class ServicesManagementAdmin {
 		this.scanner = new Scanner(System.in);
 	}
 
-	public boolean displayMenu(User user) throws ClassNotFoundException, SQLException {
+	public boolean displayMenu(User user) throws ClassNotFoundException, SQLException, InterruptedException {
 		while (true) {
 			Helper.printFunction(str.adminService);
 
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(5, choice))
-					 break;	
-				 Helper.printFunction(str.invalidInput);
-			}
-
+				int choice= Helper.choiceInput(5);
+				
 			switch (choice) {
-			case 1: {
+			case 1: { 
 				servicesController.listServices();
 				break;
 			}
@@ -43,7 +35,8 @@ public class ServicesManagementAdmin {
 			case 3:
 				return true;
 			case 4: {
-				break;
+				
+				return false;
 			}
 			case 5: {
 				scanner.close();

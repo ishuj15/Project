@@ -20,16 +20,9 @@ public class ServicesMenu {
 		while (true) {
 
 			Helper.printFunction(str.residentServices);
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
+			
+				int choice= Helper.choiceInput(7);
 				
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(7, choice))
-					 break;	
-				 Helper.printFunction(str.invalidInput);
-			}
 
 			switch (choice) {
 			case 1: {

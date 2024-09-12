@@ -1,12 +1,24 @@
 package com.Model;
 
-public class Services {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Services  implements ModelInterface{
 	private String idServices;
 	private String userId;
 	private String serviceName;
 	private String description;
 	private String status;
-
+	 @Override
+	    public List<String> toRow(List<String> fields) {
+		 List<String> row= new ArrayList<>();
+		 if(fields.contains("serviceName")) row.add(serviceName);
+		 if(fields.contains("description")) row.add(description);
+		 if(fields.contains("status")) row.add(status);
+		 return row;
+	       
+	    } 
 	// Getters and Setters
 	public String getIdServices() {
 		return idServices;

@@ -1,8 +1,11 @@
 package com.Model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class Alert {
+public class Alert implements ModelInterface {
 	private String idAlert;
 	private String message;
 	private Date date;
@@ -40,4 +43,13 @@ public class Alert {
 	public void setTargetRole(String targetRole) {
 		this.targetRole = targetRole;
 	}
+	@Override
+    public List<String> toRow(List<String> fields) {
+		 List<String> row = new ArrayList<>();
+		 if (fields.contains("targetRole")) row.add(targetRole);
+	        if (fields.contains("Message")) row.add(message);
+	        if (fields.contains("date")) row.add(date.toString());
+	       
+	        return row;
+    }
 }

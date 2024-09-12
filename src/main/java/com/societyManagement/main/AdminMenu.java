@@ -21,15 +21,9 @@ public class AdminMenu {
 		boolean loggedIn = true;
 		while (true) {
 			Helper.printFunction(str.adminMenu);
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(9, choice))
-					 break;	
-				 Helper.printFunction(str.invalidInput);
-			}
+			
+				int choice= Helper.choiceInput(9);
+				 
 			switch (choice) {
 			case 1:
 
@@ -55,14 +49,8 @@ public class AdminMenu {
 				loggedIn=adminController.complaintManage.displayMenu(user);
 				break;
 			}
-//                case 7:
-//                {
-//                	adminController.attendanceManage.displayMenu(user);
-//                	break;
-//                }
-			case 7:
-				return true;
-			case 8: {
+			
+			case 7: {
 				System.out.println(str.loggingout);
 				Thread.sleep(1000);
 				return false;

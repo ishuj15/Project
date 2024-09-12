@@ -23,21 +23,14 @@ public class ResidentMenu {
 		
 		while (true) {
 			Helper.printFunction(str.residentMenu);
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(8, choice))
-					 break;	
-				 Helper.printFunction(str.invalidInput);
-			}
-
+			
+				int choice= Helper.choiceInput(8);
+				
 			switch (choice) {
 			case 1: {
 				loggedIn = residentController.userManagementObj.displayMenu(user);
 				break;
-			}
+			} 
 			case 2: {
 				loggedIn = residentController.noticesMenuObj.displayMenu(user);
 

@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -13,6 +14,7 @@ import com.societyManagement.main.GuardMenu;
 import com.societyManagement.main.ResidentMenu;
 import com.util.FileLogging;
 import com.util.Helper;
+import com.util.PrintInTable;
 import com.util.str;
 
 public class UserController {
@@ -28,18 +30,15 @@ public class UserController {
 			Helper.printFunction(str.enterUserName);
 			userName = scanner.nextLine().trim();
 			if (Helper.isUsernameValid(userName)  ) {
-				User user2=userService.getUserByUserName(userName);
-				System.out.println(user2.getUserName());
-				if(user2.equals(null))
+				
+				if(userService.getUserByUserName(userName)==null)
 				{
 					break;	
 				}
 				else 
 					System.out.println(str.userNameTaken);		
 			}
-			else
-				System.out.println(str.invalidInput);
-		} 
+		}  
 		while (true) {
 			System.out.print(str.enterRole);
 			userRole = scanner.nextLine().trim();
@@ -103,7 +102,6 @@ public class UserController {
 
 	public void viewUser(String idUser) throws SQLException, ClassNotFoundException {
 		User user =  userService.getUserByUserName(idUser);
-
 		if (user != null) {
 			System.out.println("-----------------------------------------------------");
 			System.out.printf("| %-15s | %-30s |\n", "Field", "Value");
@@ -130,21 +128,9 @@ public class UserController {
 			System.out.println(str.userNotFound);
 			return ;
 		}
-		System.out.printf(
-				"+----+-----------------+------------------------------+-------------------+------------------------------+------------------------------+%n");
-		System.out.printf(
-				"| SN | User Name       | User Role                    | Phone No          | Email                        | Address                      |%n");
-		System.out.printf(
-				"+----+-----------------+------------------------------+-------------------+------------------------------+------------------------------+%n");
-
-		int serialNumber = 1;
-		for (User user : users) {
-			System.out.printf("| %-2d | %-15s | %-30s | %-17s | %-28s | %-28s |%n", serialNumber++, user.getUserName(),
-					user.getUserRole(), user.getPhoneNo(), user.getEmail(), user.getAddress());
-		}
-
-		System.out.printf(
-				"+----+-----------------+------------------------------+-------------------+------------------------------+------------------------------+%n");
+		List<String> headers= Arrays.asList( "S.No", "User Name","User Role", "Phone No","Email","Address");
+		List<String> fields= Arrays.asList(  "userName", "userRole", "phoneNo", "email","address");
+		PrintInTable.printTable(users, headers, fields);
 	}
 
 	public void updateUser(User user) throws SQLException, ClassNotFoundException {
@@ -154,15 +140,9 @@ public class UserController {
 
 		String columnToUpdate = null, newValue = null;
 
-		int choice = 0;
-		while (true) {
-			System.out.println(str.enterChoice);
-
-			choice = Helper.choiceInput();
-			if (Helper.checkLimit(6, choice))
-				break;
-			System.out.println(str.invalidInput);
-		}
+		
+		int	choice = Helper.choiceInput(6);
+			
 		switch (choice) {
 		case 1: {
 			while (true) {
@@ -171,13 +151,15 @@ public class UserController {
 				newValue = scanner.nextLine();
 				if (Helper.isUsernameValid(newValue) )
 				{
-					User user2 =userService.getUserByUserName(newValue);
-					if(user2.equals(null))
-						break;
+					if(userService.getUserByUserName(newValue)==null)
+					{
+						break;	
+					}
 						else
 							System.out.println(str.userNameTaken);
-					
 				}
+				
+				
 			}
 			break;
 		}
@@ -280,7 +262,7 @@ public class UserController {
 		            logger.warning("Failed login attempt for username: " + userName);
 	            
 	           
-	        } else {
+	        } else { 
 	        	System.out.println( str.loginSuccessful+ user.getUserName() + ".");
 	            logger.info("User logged in: " + user.getUserName());
 	           
@@ -318,7 +300,7 @@ public class UserController {
 			System.out.printf("| %-5s | %-20s |\n", "S.No", "Username");
 			System.out.println("|-------|----------------------|");
 
-			int serialNumber = 1;
+			int serialNumber = 1; 
 			for (User user : users) {
 				if(user.getUserRole().equals("resident"))
 				{
@@ -329,15 +311,7 @@ public class UserController {
 			}
 			System.out.println("|-------|----------------------|");
 		}
-		int choice = 0;
-		while (true) {
-			System.out.println(str.enterChoice);
-
-			choice = Helper.choiceInput();
-			if (Helper.checkLimit(count, choice))
-				break;
-			System.out.println(str.invalidInput);
-		}
+			int choice = Helper.choiceInput(count);
 		User selectedUser = users.get(choice - 1);
 		return selectedUser;
 	}
@@ -351,14 +325,7 @@ public class UserController {
 		}
 		else {
 			listUsers();
-		int choice = 0;
-		while (true) {
-			System.out.println(str.enterChoice);
-			choice = Helper.choiceInput();
-			if (Helper.checkLimit(users.size(), choice))
-				break;
-			System.out.println(str.invalidInput);	
-		}
+			int choice = Helper.choiceInput(users.size());
 		User selectedUser = users.get(choice - 1);
 		return selectedUser;
 		}	

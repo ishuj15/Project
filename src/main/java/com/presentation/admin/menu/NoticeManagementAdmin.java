@@ -17,21 +17,13 @@ public class NoticeManagementAdmin {
 		this.scanner = new Scanner(System.in);
 	}
 
-	public boolean displayMenu(User user) throws SQLException, ClassNotFoundException {
+	public boolean displayMenu(User user) throws SQLException, ClassNotFoundException, InterruptedException {
 
 		while (true) {
 
 			Helper.printFunction(str.adminNotice);
-			int choice=0;
-			while(true)
-			{
-				Helper.printFunction(str.enterChoice);
-				choice= Helper.choiceInput();
-				 if(Helper.checkLimit(7, choice))
-					 break;	
-				 Helper.printFunction(str.invalidInput);
-			}
-
+			
+				int choice= Helper.choiceInput(7);
 			switch (choice) {
 			case 1: {
 				masterController.noticesController.createNotice();
@@ -52,7 +44,8 @@ public class NoticeManagementAdmin {
 			case 5:
 				return true;
 			case 6: {
-				break;
+				
+				return false;
 			}
 			case 7: {
 				scanner.close();

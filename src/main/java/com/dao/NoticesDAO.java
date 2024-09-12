@@ -14,7 +14,7 @@ public class NoticesDAO extends GenericDAO<Notices> {
 		notice.setIdNotices(resultSet.getString("IdNotices"));
 		notice.setTitle(resultSet.getString("title"));
 		notice.setMessage(resultSet.getString("message"));
-		notice.setDate(resultSet.getDate("date"));
+		notice.setDate(resultSet.getString("date"));
 		notice.setTargetRole(resultSet.getString("targetRole"));
 
 		return notice; 
