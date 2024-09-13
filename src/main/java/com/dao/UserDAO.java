@@ -8,6 +8,7 @@ import com.Model.User;
 
 public class UserDAO extends GenericDAO<User> {
 
+
 	@Override
 	protected User mapResultSetToEntity(ResultSet resultSet) throws SQLException {
 		User user = new User();
@@ -33,12 +34,12 @@ public class UserDAO extends GenericDAO<User> {
 		String sqlQuery = "SELECT * FROM user WHERE idUser = \"" + userId + "\"";
 		return executeGetQuery(sqlQuery);
 	}
- 
+
 	public User getUserByUserName(String userName) throws SQLException, ClassNotFoundException {
 		String sqlQuery = "SELECT * FROM user WHERE userName = \"" + userName + "\"";
-		
+
 		return executeGetQuery(sqlQuery);
-		
+
 	}
 
 	public boolean deleteUser(String userId) throws SQLException, ClassNotFoundException {

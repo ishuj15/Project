@@ -34,4 +34,3 @@ public class NoticesService {
 		noticesDAO.deleteNotice(id);
 	}
 }
-  

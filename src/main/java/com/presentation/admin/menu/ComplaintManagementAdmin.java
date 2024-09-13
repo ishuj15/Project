@@ -20,9 +20,9 @@ public class ComplaintManagementAdmin {
 	public boolean displayMenu(User user) throws ClassNotFoundException, SQLException {
 		while (true) {
 			Helper.printFunction(str.adminComplaint);
-			
+
 				int choice= Helper.choiceInput(6);
-			
+
 			switch (choice) {
 			case 1: {
 				complaintController.updateComplaint();

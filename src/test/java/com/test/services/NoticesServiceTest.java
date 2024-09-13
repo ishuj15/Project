@@ -1,6 +1,5 @@
 package com.test.services;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -14,12 +13,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.Notices;
 import com.dao.NoticesDAO;
-
 import com.service.NoticesService;
 @ExtendWith(MockitoExtension.class)
 public class NoticesServiceTest {

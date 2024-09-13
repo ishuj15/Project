@@ -18,7 +18,7 @@ public class ComplaintDAO extends GenericDAO<Complaint> {
 		complaint.setStatus(resultSet.getString("status"));
 
 		return complaint;
-	} 
+	}
 
 	public boolean addComplaint(Complaint complaint) throws SQLException, ClassNotFoundException {
 		String sqlQuery = String.format(

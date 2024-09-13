@@ -1,6 +1,6 @@
 package com.test.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import com.Model.Services;
 import com.dao.ServicesDAO;
 import com.service.ServicesService;
@@ -55,7 +56,7 @@ class ServicesServiceTest {
 		String userId="123";
 		when(servicesDao.deleteService(userId)).thenReturn(true);
 		servicesServiceObj.deleteService(userId);
-		verify(servicesDao,times(1)).deleteService(userId);	
+		verify(servicesDao,times(1)).deleteService(userId);
 	}
 	@Test
 	public void GetAllServicesTest() throws ClassNotFoundException, SQLException
@@ -74,6 +75,6 @@ class ServicesServiceTest {
 		when(servicesDao.getServiceById(userId)).thenReturn(expected);
 		List<Services> actual = servicesServiceObj.getServiceById(userId);
 		assertEquals(expected,actual);
-		verify(servicesDao, times(1)).getServiceById(userId);	
+		verify(servicesDao, times(1)).getServiceById(userId);
 	}
 }

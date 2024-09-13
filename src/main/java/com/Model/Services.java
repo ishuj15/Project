@@ -1,7 +1,6 @@
 package com.Model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Services  implements ModelInterface{
@@ -13,12 +12,18 @@ public class Services  implements ModelInterface{
 	 @Override
 	    public List<String> toRow(List<String> fields) {
 		 List<String> row= new ArrayList<>();
-		 if(fields.contains("serviceName")) row.add(serviceName);
-		 if(fields.contains("description")) row.add(description);
-		 if(fields.contains("status")) row.add(status);
+		 if(fields.contains("serviceName")) {
+			row.add(serviceName);
+		}
+		 if(fields.contains("description")) {
+			row.add(description);
+		}
+		 if(fields.contains("status")) {
+			row.add(status);
+		}
 		 return row;
-	       
-	    } 
+
+	    }
 	// Getters and Setters
 	public String getIdServices() {
 		return idServices;

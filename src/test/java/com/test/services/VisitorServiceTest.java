@@ -1,6 +1,6 @@
 package com.test.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,7 +26,7 @@ class VisitorServiceTest {
 //	void test() {
 //		fail("Not yet implemented");
 //	}
-	
+
 	@Mock
 	private VisitorDAO visitorDao;
 	@InjectMocks
@@ -42,11 +42,11 @@ class VisitorServiceTest {
 		visitor.setStatus("pending");
 		visitor.setName("john");
 		visitor.setContactNo("12345678900");
-		
+
 		when(visitorDao.addVisitor(visitor)).thenReturn(true);
 		visitorServiceObj.addVisitor(visitor);
 		verify(visitorDao, times(1)).addVisitor(visitor);
-		
+
 	}
 	@Test
 	public void getVisitorByIdTest() throws ClassNotFoundException, SQLException
@@ -75,7 +75,7 @@ class VisitorServiceTest {
 		 visitorServiceObj.deleteVisitor(VisitorId);
 		 verify(visitorDao, times(1)).deleteVisitor(VisitorId);
 		}
-	
+
 
 	@Test
 	public void updateVisitorTest() throws ClassNotFoundException, SQLException
@@ -98,7 +98,7 @@ class VisitorServiceTest {
 		assertEquals(expected,actual);
 		verify(visitorDao,times(1)).getAllpendingRequests(userId, approvalReq);
 	}
-	
-	
+
+
 
 }

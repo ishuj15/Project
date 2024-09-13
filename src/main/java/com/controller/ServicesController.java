@@ -13,7 +13,6 @@ import com.util.PrintInTable;
 import com.util.str;
 
 public class ServicesController {
-	@SuppressWarnings("resource")
 	Scanner scanner = new Scanner(System.in);
 
 	private final ServicesService servicesService = new ServicesService();
@@ -25,7 +24,7 @@ public class ServicesController {
 		System.out.print(str.enterServiceDescription);
 		String description = scanner.nextLine();
 		System.out.print(str.enterCurrentStatus);
-		String status = scanner.nextLine(); 
+		String status = scanner.nextLine();
 
 		Services service = new Services();
 		service.setIdServices(Helper.generateUniqueId());
@@ -35,7 +34,7 @@ public class ServicesController {
 		service.setStatus(status);
 		servicesService.addService(service);
 		System.out.println(str.serviceCreatedSuccessfully);
-	} 
+	}
 
 	public void viewService(String idUser) throws SQLException, ClassNotFoundException {
 
@@ -66,26 +65,27 @@ public class ServicesController {
 	}
 
 	public void updateService(String idUser) throws SQLException, ClassNotFoundException {
-		Scanner scanner = new Scanner(System.in);
+
 		List<Services> service = servicesService.getServiceById(idUser);
 		if (service.equals(null))
 		{
 			System.out.println(str.serviceNotFound);
 			return;
-			
 		}
+		else
+		{
 		viewService(idUser);
 		System.out.println(str.selectServiceToModify);
 		int choice = Helper.choiceInput(service.size());
-			
+
 		Services selectedService = service.get(choice - 1);
-		if (selectedService.equals(null))
+		if (selectedService.equals(null)) {
 			System.out.println(str.serviceNotFound);
-		else {
+		} else {
 			System.out.println(str.serviceUpdateList);
 			System.out.println(str.serviceToBeUpdated);
 			int choice2  = Helper.choiceInput(4);
-				
+
 			switch (choice2) {
 			case 1: {
 				System.out.print(str.enterServiceName);
@@ -120,7 +120,7 @@ public class ServicesController {
 				System.out.println(str.invalidInput);
 			}
 
-		}
+		}}
 	}
 
 	public void deleteService(String idUser) throws SQLException, ClassNotFoundException {
@@ -129,40 +129,45 @@ public class ServicesController {
 		{
 			System.out.println(str.serviceNotFound);
 			return;
-			
 		}
-
+		else
+		{
 		System.out.println(str.selectServiceThatNeedToBeDeleted);
 		viewService(idUser);
-		
-			int choice = Helper.choiceInput(service.size());
-			
-
+		int choice = Helper.choiceInput(service.size());
 		Services selectedService = service.get(choice - 1);
-
 		servicesService.deleteService(selectedService.getIdServices());
 		System.out.println(str.serviceDeleted);
+		}
 	}
 
 	public void deleteServiceByAdmin() throws SQLException, ClassNotFoundException {
 		Services service = getService();
+		if (service.equals(null))
+		{
+			System.out.println(str.serviceNotFound);
+			return ;
+		}
+		else
+		{
 		servicesService.deleteService(service.getIdServices());
 		System.out.println(str.serviceDeleted);
+		}
 	}
 
 	public Services getService() throws ClassNotFoundException, SQLException {
-
 		List<Services> services = servicesService.getAllServices();
 		if (services.equals(null))
 		{
 			System.out.println(str.serviceNotFound);
 			return null;
-			
 		}
+		else
+		{
 		listServices();
 		System.out.println(str.selectService);
 			int choice = Helper.choiceInput(services.size());
-
 		return services.get(choice - 1);
+		}
 	}
 }

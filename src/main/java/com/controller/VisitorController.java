@@ -16,9 +16,8 @@ import com.util.str;
 
 public class VisitorController {
 	private final UserController userController=new UserController();
-	
+
 	private final VisitorService visitorService = new VisitorService();
-	@SuppressWarnings("resource")
 	private static Scanner scanner = new Scanner(System.in);
 
 	public void createVisitor(User user, String apr) throws SQLException, ClassNotFoundException {
@@ -28,15 +27,16 @@ public class VisitorController {
 		Date date = new Date(System.currentTimeMillis());
 		System.out.print(str.visitorName);
 		String name = scanner.nextLine();
-		while (true) { 
+		while (true) {
 			System.out.print(str.enterVisitorContact);
 			contact = scanner.nextLine();
-			if (Helper.isPhoneNumberValid(contact))
+			if (Helper.isPhoneNumberValid(contact)) {
 				break;
-			else
+			} else {
 				System.out.println(str.wrongPhoneNo);
+			}
 		}
-		while (true) { 
+		while (true) {
 			System.out.print(str.enterVisitorDate);
 			arrivalDate = scanner.nextLine();
 			if (Helper.isValidDate(arrivalDate)) {
@@ -44,18 +44,20 @@ public class VisitorController {
 				if ((arrivalDate2.after(date) || arrivalDate2.equals(date))) {
 					break;
 				}
-			} else
+			} else {
 				System.out.println(str.invalidInput);
+			}
 		}
 		System.out.print(str.enterVisitPuspose);
 		String purpose = scanner.nextLine();
 		while (true) {
 			System.out.print(str.enterArrivalTime);
 			time = scanner.nextLine();
-			if (Helper.isValidTime(time))
+			if (Helper.isValidTime(time)) {
 				break;
-			else
+			} else {
 				System.out.println(str.wrongTimeFormat);
+			}
 		}
 		Time arrival_time = Time.valueOf(time);
 		while (true) {
@@ -64,10 +66,12 @@ public class VisitorController {
 
 			if (Helper.isValidDate(depDate)) {
 				depDate2 = Date.valueOf(depDate);
-				if ((depDate2.after(arrivalDate2) || arrivalDate2.equals(depDate2)))
+				if ((depDate2.after(arrivalDate2) || arrivalDate2.equals(depDate2))) {
 					break;
-			} else
+				}
+			} else {
 				System.out.println(str.invalidInput);
+			}
 		}
 		while (true) {
 			System.out.print(str.enterDepartureTime);
@@ -96,28 +100,29 @@ public class VisitorController {
 		visitor.setStatus(apr);
 		visitor.setDep_date(depDate);
 		visitorService.addVisitor(visitor);
-		
+
 	}
 
 	public void viewVisitor(String userId) throws SQLException, ClassNotFoundException {
-		
+
 		List<Visitor> visitors = visitorService.getVisitorById(userId);
 		if (visitors == null || visitors.isEmpty()) {
 			System.out.println(str.visitorNotFound);
 			return;
 		} else {
-			
+
 			List<String> headers=  Arrays.asList("S.No", "Name", "Contact", "Purpose","Arrival Date", "Arrival Time", "Departure Date",  "Departure Time","Approval Req");
 			List<String> fields = Arrays.asList("name","contactNo","purpose","Arrival date","arrivalTime","departure date","departureTime","Status");
 			PrintInTable.printTable(visitors, headers,fields);
 		}
-		
+
 	}
 
 	public void listVisitors() throws SQLException, ClassNotFoundException {
 		List<Visitor>visitors=  visitorService.getAllVisitors();
 		if (visitors == null || visitors.isEmpty()) {
 			System.out.println(str.visitorNotFound);
+			return;
 
 		} else {
 //			List<String> headers=  Arrays.asList("S.No", "Name", "Contact","Arrival Date", "Purpose", "Arrival Time", "Departure Time", "Departure Date", "Approval Req");
@@ -129,11 +134,11 @@ public class VisitorController {
 					"------------------------------------------------------------------------------------------------------------------"
 							+ "------------------------------------------------------");
 			int serialNumber = 1;
-			
+
 			for (Visitor visitor : visitors) {
-				User user= userController.userService.getUserById(visitor.getUserId());
+				User user= UserController.userService.getUserById(visitor.getUserId());
 				System.out.printf("%-5d %-10s %-15s %-15s %-20s %-20s %-20s %-15s %-15s %-15s\n", serialNumber++,
-						visitor.getName(), visitor.getContactNo(), visitor.getDate(), 
+						visitor.getName(), visitor.getContactNo(), visitor.getDate(),
 						visitor.getPurpose(), visitor.getArrivalTime(), visitor.getDepartureTime(),
 						visitor.getDep_date(), visitor.getStatus(),user.getUserName());
 			}
@@ -152,41 +157,47 @@ public class VisitorController {
 		}
 		System.out.println(str.selectVisitor);
 		viewVisitor(userId);
-		
+
 			int choice = Helper.choiceInput(visitors.size());
 		Visitor selectedVisitor = visitors.get(choice - 1);
 		String visitorId = selectedVisitor.getIdVisitor();
-		
+
 		System.out.print(str.visitorUpdateList);
 		System.out.println(str.visitorUpdateOption);
 		int choice2 = Helper.choiceInput(7);
-			
+
 		String ColumnToUpdate=null,NewValue=null;
 		switch (choice2) {
 		case 1: {
+			while(true)
+			{
 			System.out.print(str.visitorName);
 			NewValue = scanner.nextLine();
+			if(Helper.notNullCheck(NewValue)) {
+				break;
+			}
+			}
 			ColumnToUpdate="name";
-			
 			break;
 		}
 
 		case 2: {
-			
+
 			 while (true) {
 					System.out.print(str.enterVisitorContact);
 					NewValue = scanner.nextLine();
-					if (Helper.isPhoneNumberValid(NewValue))
+					if (Helper.isPhoneNumberValid(NewValue)) {
 						break;
-					else
+					} else {
 						System.out.println(str.wrongPhoneNo);
+					}
 				}
 			ColumnToUpdate="contact";
-			
+
 			break;
 		}
 		case 3: {
-			
+
 			 while (true) {
 					System.out.print(str.enterVisitorDate);
 					NewValue = scanner.nextLine();
@@ -195,13 +206,14 @@ public class VisitorController {
 						if ((NewValue2.after(date) || NewValue2.equals(date))) {
 							break;
 						}
-					} else
+					} else {
 						System.out.println(str.invalidInput);
+					}
 				}
 
-			 
+
 			ColumnToUpdate="date_of_arrival";
-		
+
 			break;
 		}
 		case 4: {
@@ -214,7 +226,7 @@ public class VisitorController {
 			System.out.print("Enter departure date: ");
 			 NewValue = scanner.nextLine();
 			 ColumnToUpdate="departure_date";
-			
+
 			break;
 		}
 		case 6: {
@@ -228,21 +240,21 @@ public class VisitorController {
 		default: {
 			System.out.println(str.invalidInput);
 		}
-		}		
+		}
 		visitorService.updateVisitor(visitorId, ColumnToUpdate, NewValue);
 		System.out.println(str.visitorUpdatedSuccessfully);
 	}
 
 	public void deleteVisitor(String userId) throws SQLException, ClassNotFoundException {
-		
+
 		List<Visitor> visitors = visitorService.getVisitorById(userId);
 		if (visitors == null || visitors.isEmpty()) {
 			System.out.println(str.whichVisitorToDelete);
 			return;
 		}
-		
+
 		viewVisitor(userId);
-		
+
 			int choice = Helper.choiceInput(visitors.size());
 		Visitor selectedVisitor = visitors.get(choice - 1);
 		String visitorId = selectedVisitor.getIdVisitor();
@@ -250,7 +262,7 @@ public class VisitorController {
 		System.out.println(str.visitorDeletedSuccessfully);
 	}
 	public void verifyVisitor(User user) throws SQLException, ClassNotFoundException {
-		
+
 		List<Visitor> visitors = visitorService.getVisitorById(user.getIdUser());
 		if (visitors == null || visitors.isEmpty()) {
 			System.out.println(str.visitorNotFound);
@@ -260,7 +272,7 @@ public class VisitorController {
 			viewVisitor(user.getIdUser());
 			System.out.println(str.selectVisitorToVerify);
 				int choice = Helper.choiceInput(visitors.size());
-				
+
 			Visitor selectedVisitor = visitors.get(choice - 1);
 			System.out.println(selectedVisitor.getStatus());
 		}
@@ -272,22 +284,22 @@ public class VisitorController {
 				System.out.println(str.visitorNotFound);
 				return;
 			} else {
-				
+
 				List<String> headers=  Arrays.asList("S.No", "Name", "Contact","Purpose","Arrival Date",  "Arrival Time",  "Departure Date","Departure Time", "Approval Req");
 				List<String> fields = Arrays.asList("name","contactNo","purpose","Arrival date","arrivalTime","departure date","departureTime","Status");
 				PrintInTable.printTable(visitors, headers,fields);
 				System.out.println(str.selectToDenyOrApprove);
-				
-					int choice = Helper.choiceInput(visitors.size()); 
-					
+
+				int choice = Helper.choiceInput(visitors.size());
+
 				Visitor selectedVisitor = visitors.get(choice - 1);
 				String visitorId = selectedVisitor.getIdVisitor();
-				
+
 				System.out.println(str.selectToApprove);
 				System.out.println(str.selectToDeny);
-				
+
 					int choice2 = Helper.choiceInput(2);
-					
+
 				if (choice2 == 1) {
 					visitorService.updateVisitor(visitorId, "approvalReq",str.approved );
 					System.out.println(str.requestApproved);
@@ -295,10 +307,10 @@ public class VisitorController {
 					visitorService.updateVisitor(visitorId, "approvalReq",str.rejected );
 					System.out.println(str.requestDenied);
 				}
-			}	 
+			}
 	}
 	public void deleteVisitorByAdmin() throws ClassNotFoundException, SQLException {
-				 
+
 		 List<Visitor> visitors = visitorService.getAllVisitors();
 			if (visitors == null || visitors.isEmpty()) {
 				System.out.println(str.visitorNotFound);
@@ -310,8 +322,6 @@ public class VisitorController {
 			String visitorId=selectedVisitor.getIdVisitor();
 			visitorService.deleteVisitor(visitorId);
 			System.out.println(str.visitorDeletedSuccessfully);
-		
+
 	}
 }
-
-;

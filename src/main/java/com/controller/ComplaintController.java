@@ -24,11 +24,12 @@ public class ComplaintController {
 		{
 			System.out.print(str.enterComplaintDescription);
 			description = scanner.nextLine();
-			if(Helper.notNullCheck(description))
+			if(Helper.notNullCheck(description)) {
+				break;
+			} else {
 				System.out.println(str.notNullComplaint);
-			else
-				break;  
-		} 
+			}
+		}
 		String status = str.pending;
 		String idComplaint = Helper.generateUniqueId();
 		Complaint complaint = new Complaint();
@@ -39,7 +40,6 @@ public class ComplaintController {
 		complaint.setStatus(status);
 		complaintService.addComplaint(complaint);
 		System.out.println(str.complaintCreated);
-
 	}
 
 	public void viewComplaint(User user) throws SQLException, ClassNotFoundException {
@@ -70,7 +70,7 @@ public class ComplaintController {
 //
 //			int serialNumber = 1;
 //			for (Complaint complaint : complaints) {
-//				
+//
 //				User user = UserController.userService.getUserById(complaint.getUserId());
 //
 //				System.out.printf("%-5d %-15s %-20s %-15s %-15s%n", serialNumber++, complaint.getDescription(),
@@ -92,11 +92,11 @@ public class ComplaintController {
 		return;}
 		else {
 			String idComplaint = complaint.getIdComplaint();
-			
+
 			System.out.println(str.complaintUpdateList);
 			System.out.println(str.complaintTobeUpdated);
 			int choice = Helper.choiceInput(3);
-				
+
 			switch (choice) {
 
 			case 1: {
@@ -105,12 +105,12 @@ public class ComplaintController {
 				{
 					System.out.println(str.enterStatus);
 					status = scanner.nextLine();
-					if(Helper.ComplaintStatus(status) )
+					if(Helper.ComplaintStatus(status) ) {
 						break;
-					
-					else 
+					} else {
 						Helper.printFunction(str.notNullStatus);
-						
+					}
+
 				}
 				complaintService.updateComplaint(idComplaint, "status", status);
 				System.out.println(str.complaintUpdated);
@@ -125,7 +125,7 @@ public class ComplaintController {
 				return;
 			}
 			default:
-				
+
 				System.out.println(str.invalidInput);
 			}
 		}
@@ -149,13 +149,20 @@ public class ComplaintController {
 	}
 	}
 	public Complaint getComplaint() throws ClassNotFoundException, SQLException {
-
 		List<Complaint> complaints = complaintService.getAllComplaints();
+		 if(complaints.equals(null) || complaints.isEmpty())
+		 {
+			 System.out.println(str.complaintNotFound);
+			 return null;
+		 }
+		 else
+		 {
 		listComplaints();
 		System.out.println(str.selectComplaint);
 		int choice = Helper.choiceInput(complaints.size());
 		return complaints.get(choice - 1);
-	}
+		 }
+		 }
 
 	public void deleteComplaintAdmin() throws SQLException, ClassNotFoundException {
 		Complaint complaint = getComplaint();

@@ -23,9 +23,9 @@ public class VisitorDAO extends GenericDAO<Visitor> {
 		visitor.setDep_date(resultSet.getString("departure_date"));
 		return visitor;
 	}
- 
+
 	public boolean addVisitor(Visitor visitor) throws SQLException, ClassNotFoundException {
-		
+
 		String sqlQuery = String.format(
 				"INSERT INTO visitor (idvisitor, userId, name,contact, purpose, date_of_arrival,"
 						+ "arrivalTime,departure_date,departureTime, approvalReq) "
@@ -40,7 +40,7 @@ public class VisitorDAO extends GenericDAO<Visitor> {
 	public List<Visitor> getVisitorById(String userId) throws SQLException, ClassNotFoundException {
 		String sqlQuery = "SELECT * FROM visitor WHERE userId = \"" + userId + "\"";
 		return executeGetAllQuery(sqlQuery);
-	} 
+	}
 
 	public List<Visitor> getAllVisitors() throws SQLException, ClassNotFoundException {
 		String sqlQuery = "SELECT * FROM visitor";
@@ -54,8 +54,10 @@ public class VisitorDAO extends GenericDAO<Visitor> {
 
 	public boolean updateVisitor(String visitorId, String columnToUpdate, String newValue)
 			throws SQLException, ClassNotFoundException {
-		String sqlQuery = String.format("UPDATE visitor SET '%s' = '%s' WHERE idvisitor = '%s'", columnToUpdate,
-				newValue, visitorId);
+		String sqlQuery = "UPDATE visitor SET " + columnToUpdate + " = '" + newValue + "' WHERE idvisitor = '" + visitorId + "'";
+//
+//		String sqlQuery = String.format("UPDATE visitor SET '%s' = '%s' WHERE idvisitor = '%s'", columnToUpdate,
+//				newValue, visitorId);
 		return executeQuery(sqlQuery);
 	}
 	public List<Visitor> getAllpendingRequests(String userId, String apr) throws ClassNotFoundException, SQLException {

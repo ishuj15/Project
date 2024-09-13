@@ -14,15 +14,15 @@ public class VisitorMenu {
 	@SuppressWarnings("static-access")
 	public VisitorMenu() {
 		this.masterController = new MasterController();
-		this.scanner = new Scanner(System.in);
+		VisitorMenu.scanner = new Scanner(System.in);
 	}
 
 	public boolean displayMenu(User user) throws SQLException, ClassNotFoundException {
 		while (true) {
 			Helper.printFunction(str.residentVisitorMenu);
-			
+
 				int choice= Helper.choiceInput(8);
-				
+
 			switch (choice) {
 			case 1: {
 				masterController.visitorController.createVisitor(user, "Aprroved");

@@ -8,7 +8,7 @@ import com.dao.ComplaintDAO;
 
 public class ComplaintService {
 	private ComplaintDAO complaintDAO = new ComplaintDAO();
- 
+
 	public void addComplaint(Complaint complaint) throws SQLException, ClassNotFoundException {
 		complaintDAO.addComplaint(complaint);
 	}
@@ -30,4 +30,3 @@ public class ComplaintService {
 		complaintDAO.updateComplaint(idComplaint, ColumnToUpdate, NewValue);
 	}
 }
- 

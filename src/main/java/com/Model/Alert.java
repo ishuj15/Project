@@ -2,7 +2,6 @@ package com.Model;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Alert implements ModelInterface {
@@ -13,7 +12,7 @@ public class Alert implements ModelInterface {
 
 	// Getters and Setters
 	public String getIdAlert() {
-		return idAlert; 
+		return idAlert;
 	}
 
 	public void setIdAlert(String idAlert) {
@@ -46,10 +45,16 @@ public class Alert implements ModelInterface {
 	@Override
     public List<String> toRow(List<String> fields) {
 		 List<String> row = new ArrayList<>();
-		 if (fields.contains("targetRole")) row.add(targetRole);
-	        if (fields.contains("Message")) row.add(message);
-	        if (fields.contains("date")) row.add(date.toString());
-	       
+		 if (fields.contains("targetRole")) {
+			row.add(targetRole);
+		}
+	        if (fields.contains("Message")) {
+				row.add(message);
+			}
+	        if (fields.contains("date")) {
+				row.add(date.toString());
+			}
+
 	        return row;
     }
 }

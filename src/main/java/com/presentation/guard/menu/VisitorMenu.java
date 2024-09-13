@@ -22,17 +22,15 @@ public class VisitorMenu {
 	public boolean displayMenu(User user) throws ClassNotFoundException, SQLException {
 		while (true) {
 			Helper.printFunction(str.guardVisitorMenu);
-			
-				int choice= Helper.choiceInput(5);
-				
 
+				int choice= Helper.choiceInput(5);
 			switch (choice) {
 			case 1: {
 				User user2 = UserController.getUsernameList();
-				
+
 				masterController.visitorController.createVisitor(user2, "Pending");
 				Helper.printFunction(str.requestSent);
-			
+
 				break;
 			}
 			case 2: {
@@ -46,7 +44,7 @@ public class VisitorMenu {
 				return false;
 			case 5: {
 				scanner.close();
-				System.exit(0); 
+				System.exit(0);
 				return false;
 			}
 			default:

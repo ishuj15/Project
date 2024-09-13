@@ -22,9 +22,9 @@ public class ServicesManagementAdmin {
 			Helper.printFunction(str.adminService);
 
 				int choice= Helper.choiceInput(5);
-				
+
 			switch (choice) {
-			case 1: { 
+			case 1: {
 				servicesController.listServices();
 				break;
 			}
@@ -35,7 +35,7 @@ public class ServicesManagementAdmin {
 			case 3:
 				return true;
 			case 4: {
-				
+
 				return false;
 			}
 			case 5: {

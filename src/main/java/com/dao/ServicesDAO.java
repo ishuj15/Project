@@ -19,9 +19,9 @@ public class ServicesDAO extends GenericDAO<Services> {
 		service.setServiceName(resultSet.getString("serviceName"));
 		service.setDescription(resultSet.getString("Description"));
 		service.setStatus(resultSet.getString("status"));
-		return service; 
+		return service;
 	}
- 
+
 	public boolean addService(Services service) throws SQLException, ClassNotFoundException {
 		String sqlQuery = String.format(
 				"INSERT INTO services (idServices, userId, serviceName, Description,status) VALUES ('%s','%s','%s','%s','%s')",

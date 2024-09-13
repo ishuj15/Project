@@ -11,11 +11,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.Complaint;
@@ -24,7 +22,7 @@ import com.service.ComplaintService;
 
 @ExtendWith(MockitoExtension.class)
 class ComplaintServiceTest {
-	
+
 	@Mock
 	private ComplaintDAO complaintDao;
 	@InjectMocks
@@ -47,7 +45,7 @@ class ComplaintServiceTest {
 		when(complaintDao.addComplaint(complaint)).thenReturn(true);
 		complaintServiceObj.addComplaint(complaint);
 		verify(complaintDao, times(1)).addComplaint(complaint);
-		
+
 	}
 	@Test
 	public void getComplaintsByIdTest() throws ClassNotFoundException, SQLException
@@ -56,11 +54,11 @@ class ComplaintServiceTest {
 		List<Complaint> expected=null;
 		when(complaintDao.getComplaintById(userId)).thenReturn(expected);
 		complaintServiceObj.getComplaintsById(userId);
-		verify(complaintDao,times(1)).getComplaintById(userId);	
+		verify(complaintDao,times(1)).getComplaintById(userId);
 	}
 	@Test
 	public void getAllComplaintTest() throws ClassNotFoundException, SQLException
-	{ 
+	{
 		List<Complaint> expected=null;
 		when(complaintDao.getAllComplaints()).thenReturn(expected);
 		complaintServiceObj.getAllComplaints();
@@ -73,7 +71,7 @@ class ComplaintServiceTest {
 		when(complaintDao.deleteComplaint(idComplaint)).thenReturn(true);
 		complaintServiceObj.deleteComplaint(idComplaint);
 		verify(complaintDao, times(1)).deleteComplaint(idComplaint);
-		
+
 	}
 	@Test
 	public void updateComplaint() throws ClassNotFoundException, SQLException
@@ -85,5 +83,5 @@ class ComplaintServiceTest {
 		complaintServiceObj.updateComplaint(idComplaint, columnToUpdate, newValue);
 		verify(complaintDao,times(1)).updateComplaint(idComplaint, columnToUpdate, newValue);
 	}
-	
+
 }

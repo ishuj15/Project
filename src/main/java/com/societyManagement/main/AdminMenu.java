@@ -21,9 +21,9 @@ public class AdminMenu {
 		boolean loggedIn = true;
 		while (true) {
 			Helper.printFunction(str.adminMenu);
-			
+
 				int choice= Helper.choiceInput(9);
-				 
+
 			switch (choice) {
 			case 1:
 
@@ -49,7 +49,7 @@ public class AdminMenu {
 				loggedIn=adminController.complaintManage.displayMenu(user);
 				break;
 			}
-			
+
 			case 7: {
 				System.out.println(str.loggingout);
 				Thread.sleep(1000);
@@ -63,13 +63,13 @@ public class AdminMenu {
 			default:
 				 Helper.printFunction(str.invalidInput);
 			}
-			if (loggedIn == false)
+			if (!loggedIn)
 			{
 				System.out.println(str.loggingout);
 				Thread.sleep(1000);
 
 				return false;
-				
+
 			}
 		}
 	}

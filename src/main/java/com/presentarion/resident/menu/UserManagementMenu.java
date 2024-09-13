@@ -24,11 +24,11 @@ public class UserManagementMenu {
 			// System.out.println(user.getIdUser());
 
 			Helper.printFunction(str.manageAccount);
-			
-				int choice= Helper.choiceInput(6);
-				 
 
-			switch (choice) { 
+				int choice= Helper.choiceInput(6);
+
+
+			switch (choice) {
 			case 1: {
 				masterController.userController.deleteUser(user);
 				return false;

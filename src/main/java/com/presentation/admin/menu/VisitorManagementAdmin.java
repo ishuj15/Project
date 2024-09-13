@@ -21,9 +21,9 @@ public class VisitorManagementAdmin {
 		while (true) {
 
 			Helper.printFunction(str.adminVisitor);
-			
+
 				int choice= Helper.choiceInput(5);
-			
+
 
 			switch (choice) {
 			case 1: {

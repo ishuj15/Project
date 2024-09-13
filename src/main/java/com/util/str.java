@@ -26,7 +26,7 @@ public class str {
 4) Update Alert
 5) Back to previous menu
 6) Log out
-7) Exit"""; 
+7) Exit""";
 	public static String adminAttendance = """
 *************************************************************************************************************************
 							Attendance Menu
@@ -126,7 +126,7 @@ public class str {
 	public static String  enterComplaintDescription="Enter complaint description: ";
 	public static String enterCurrentStatus= "Enter current status(available or not availablle) " ;
 	public static String  enterEmail=  "Enter email: ";
-	public static String enterLoginDeatils = "Enter your login details:" ; 
+	public static String enterLoginDeatils = "Enter your login details:" ;
 	public static String enterPassword = "Enter password: " ;
 	public static String enterPhoneNo = "Enter phone number: ";
 	public static String enterRole= "Enter user role (resident,guard): ";
@@ -230,8 +230,8 @@ public class str {
 7) Log out
 8) Exit
 """;
-	
-	public static String residentVisitorMenu=""" 
+
+	public static String residentVisitorMenu="""
 *************************************************************************************************************************
 							Visitor Menu
 *************************************************************************************************************************
@@ -318,16 +318,16 @@ public class str {
 	public static String viewListOfUser = "View list of users";
 	public static String visitor = "Visitor";
 	public static String  visitorRegistered = "Visitor registered successfully!";
-	
+
 	public static  String welcomeMessage ="Welcome to the Society Management Application";
 	public static String  wrongEmail = "Invalid email format";
-	
+
 	public static String wrongPassword =  "Password does not meet the policy requirements. Please try again.";
-	
+
 	public static String wrongPhoneNo = "Invalid phone number";
 	public static String visitorNotFound= "Visitor not found!";
 	public static String requestApproved = "Request approved";
-	
+
 	public static String requestDenied = "Request Denied";
 	public static String approved= "Approved";
 	public static String rejected="Rejected" ;
@@ -349,7 +349,8 @@ public class str {
 4) Arrival Time
 5) Departure Date
 6) Departure time
-7) Exit""" ;
+7) Exit
+""" ;
 	public static String visitorUpdateOption= "Which field do you want to update" ;
 	public static String selectVisitor ="Enter which visitor to update" ;
 
@@ -372,9 +373,9 @@ public class str {
 	public static String validTargetRole= "Enter a valid target role";
 	//public static String = ;
 //	public static String = ;
-//	
+//
 //	public static String = ;public static String = ;
-//	
+//
 //	public static String = ;
 //	public static String = ;
 //	public static String = ;
@@ -393,7 +394,7 @@ public class str {
 //	public static String = ;
 //	public static String = ;
 //	public static String = ;
-	
-	
+
+
 
 }

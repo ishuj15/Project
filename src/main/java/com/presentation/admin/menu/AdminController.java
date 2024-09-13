@@ -7,7 +7,7 @@ public class AdminController {
 	public VisitorManagementAdmin visitorManage;
 	public ServicesManagementAdmin servicesManage;
 	public ComplaintManagementAdmin complaintManage;
-	
+
 
 	public AdminController() {
 		this.accountManage = new AccontManagementAdmin();
@@ -16,7 +16,7 @@ public class AdminController {
 		this.visitorManage = new VisitorManagementAdmin();
 		this.servicesManage = new ServicesManagementAdmin();
 		this.complaintManage = new ComplaintManagementAdmin();
-		
+
 	}
 
 }

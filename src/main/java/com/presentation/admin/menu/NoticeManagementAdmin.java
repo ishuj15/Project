@@ -22,7 +22,7 @@ public class NoticeManagementAdmin {
 		while (true) {
 
 			Helper.printFunction(str.adminNotice);
-			
+
 				int choice= Helper.choiceInput(7);
 			switch (choice) {
 			case 1: {
@@ -44,7 +44,7 @@ public class NoticeManagementAdmin {
 			case 5:
 				return true;
 			case 6: {
-				
+
 				return false;
 			}
 			case 7: {

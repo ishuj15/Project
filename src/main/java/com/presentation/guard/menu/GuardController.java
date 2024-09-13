@@ -11,14 +11,14 @@ public class GuardController {
 	public UserManagementMenu userManagementObj;
 	public ComplaintMenu complaintMenuObj;
 	public AlertMenu alertMenuObj;
-	
+
 	public GuardController() {
 		this.userManagementObj = new UserManagementMenu();
 		this.visitorMenuObj = new VisitorMenu();
 		this.noticesMenuObj = new NoticeMenu();
 		this.alertMenuObj = new AlertMenu();
 		this.complaintMenuObj = new ComplaintMenu();
-		
+
 	}
 
 }

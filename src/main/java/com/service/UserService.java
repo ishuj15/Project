@@ -2,6 +2,7 @@ package com.service;
 
 import java.sql.SQLException;
 import java.util.List;
+
 import com.Model.User;
 import com.dao.UserDAO;
 import com.util.Helper;
@@ -21,7 +22,7 @@ public class UserService {
 
 	public User getUserByUserName(String userName) throws SQLException, ClassNotFoundException {
 		User user=userDAO.getUserByUserName(userName);
-		
+
 			return user;
 	}
 
@@ -29,19 +30,19 @@ public class UserService {
 		return  userDAO.getAllUsers();
 	}
 	public boolean updateUser(User user, String columnToUpdate, String newValue) throws SQLException, ClassNotFoundException {
-		
+
 		 return userDAO.updateUser(user.getIdUser(), columnToUpdate, newValue);
 	}
 	public void deleteUser(User user) throws SQLException, ClassNotFoundException {
 
 		userDAO.deleteUser(user.getIdUser());
 	}
- 
+
 	public  User login(String userName, String password) throws SQLException, ClassNotFoundException {
 		 User user = userDAO.getUserByUserName(userName);
 
          if (user==null) {
-        	 return null;  
+        	 return null;
          }
          return verifyPassword(password, user.getPassword())?user:null ;
 

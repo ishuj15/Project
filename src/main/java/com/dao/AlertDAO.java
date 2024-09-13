@@ -15,8 +15,8 @@ public class AlertDAO extends GenericDAO<Alert> {
 		alert.setMessage(resultSet.getString("message"));
 		alert.setDate(resultSet.getDate("date"));
 		alert.setTargetRole(resultSet.getString("targetRole"));
- 
-		return alert; 
+
+		return alert;
 	}
 
 	public boolean addAlert(Alert alert) throws SQLException, ClassNotFoundException {
@@ -25,12 +25,6 @@ public class AlertDAO extends GenericDAO<Alert> {
 				alert.getIdAlert(), alert.getMessage(), alert.getDate(), alert.getTargetRole());
 		return executeQuery(sqlQuery);
 	}
-
-//	public Alert getAlertById(String alertId) throws SQLException, ClassNotFoundException {
-//		String sqlQuery = "SELECT * FROM alert WHERE idAlert = \"" + alertId + "\"";
-//		return executeGetQuery(sqlQuery);
-//	} 
-
 	public List<Alert> getAlertByRole(String role) throws SQLException, ClassNotFoundException {
 		String sqlQuery = "SELECT * FROM alert WHERE targetRole = '" + role + "' OR targetRole = 'all'";
 

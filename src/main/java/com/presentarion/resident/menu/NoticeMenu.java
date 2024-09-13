@@ -15,21 +15,18 @@ public class NoticeMenu {
 
 	public NoticeMenu() {
 		this.noticesController = new NoticesController();
-		this.scanner = new Scanner(System.in);
+		NoticeMenu.scanner = new Scanner(System.in);
 	}
 
 	public boolean displayMenu(User user) throws SQLException, ClassNotFoundException {
 		while (true) {
 
 			Helper.printFunction(str.userNotice);
-
-			
 				int choice= Helper.choiceInput(4);
-				
 
 			switch (choice) {
 			case 1: {
-				noticesController.listNotices();
+				noticesController.viewNotice(str.resident);
 				break;
 			}
 			case 2: {

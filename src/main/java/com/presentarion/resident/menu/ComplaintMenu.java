@@ -3,7 +3,6 @@ package com.presentarion.resident.menu;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.Model.Complaint;
 import com.Model.User;
 import com.controller.ComplaintController;
 import com.util.Helper;
@@ -22,14 +21,14 @@ public class ComplaintMenu {
 		while (true) {
 			//System.out.println("Complaint Menu");
 			Helper.printFunction(str.userComplaint);
-		
-			
+
+
 				int choice = Helper.choiceInput(5);
-				
+
 
 			switch (choice) {
 			case 1: {
-				
+
 				complaintController.createComplaint(user);
 				break;
 			}

@@ -17,7 +17,7 @@ public class NoticesDAO extends GenericDAO<Notices> {
 		notice.setDate(resultSet.getString("date"));
 		notice.setTargetRole(resultSet.getString("targetRole"));
 
-		return notice; 
+		return notice;
 	}
 
 	public boolean addNotice(Notices notice) throws SQLException, ClassNotFoundException {

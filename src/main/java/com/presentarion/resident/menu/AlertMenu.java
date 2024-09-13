@@ -21,9 +21,9 @@ public class AlertMenu {
 		while (true) {
 
 			Helper.printFunction(str.userAlert);
-			
+
 			int choice = Helper.choiceInput(5);
-				
+
 			switch (choice) {
 			case 1: {
 				alertController.viewAlertByRole(user.getUserRole());
@@ -35,7 +35,7 @@ public class AlertMenu {
 				return false;
 			case 4: {
 				scanner.close();
-				System.exit(0); 
+				System.exit(0);
 				return false;
 			}
 			default:

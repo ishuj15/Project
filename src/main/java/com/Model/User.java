@@ -1,7 +1,6 @@
 package com.Model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class User implements ModelInterface {
@@ -15,15 +14,27 @@ public class User implements ModelInterface {
 	 @Override
 	    public List<String> toRow(List<String> fields) {
 		 List<String> row = new ArrayList<>();
-		 if(fields.contains("userName")) row.add(userName);
-		 if(fields.contains("userRole")) row.add(userRole);
-		 if(fields.contains("password")) row.add(password);
-		 if(fields.contains("phoneNo")) row.add(phoneNo);
-		 if(fields.contains("email")) row.add(email);
-		 if(fields.contains("address")) row.add(address);
-		 return row;     
-	    } 
-	
+		 if(fields.contains("userName")) {
+			row.add(userName);
+		}
+		 if(fields.contains("userRole")) {
+			row.add(userRole);
+		}
+		 if(fields.contains("password")) {
+			row.add(password);
+		}
+		 if(fields.contains("phoneNo")) {
+			row.add(phoneNo);
+		}
+		 if(fields.contains("email")) {
+			row.add(email);
+		}
+		 if(fields.contains("address")) {
+			row.add(address);
+		}
+		 return row;
+	    }
+
 	public String getIdUser() {
 		return idUser;
 	}

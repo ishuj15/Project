@@ -1,6 +1,5 @@
 package com.test.services;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,40 +29,40 @@ public class AlertServiceTest {
 	public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-	
+
 	@Test
 	public void addAlertTest () throws ClassNotFoundException, SQLException {
 		Alert alert= new Alert();
-		
+
 		alert.setIdAlert("123");
 		alert.setMessage("Earthquake");
-		alert.setTargetRole("all");	
+		alert.setTargetRole("all");
 		when(alertDao.addAlert(alert)).thenReturn(true);
-		
+
 		alertServiceObj.addAlert(alert);
 		verify(alertDao, times(1)).addAlert(alert);
 	}
-	
-	
+
+
 	@Test
 	public void updateAlertTest() throws ClassNotFoundException, SQLException {
 		String alertId="123";
 		String columnToUpdate="targetRole";
 		String newValue="all";
-		
+
 		when(alertDao.updateAlert(alertId, columnToUpdate, newValue)).thenReturn(true);
-		alertServiceObj.updateAlert(alertId, columnToUpdate, newValue);;
+		alertServiceObj.updateAlert(alertId, columnToUpdate, newValue);
 		verify(alertDao,times(1)).updateAlert(alertId, columnToUpdate, newValue);
 	}
 	@Test
 	public void deleteAlertTest() throws ClassNotFoundException, SQLException {
 		String alertId="123";
 		when(alertDao.deleteAlert(alertId)).thenReturn(true);
-		 
+
 		alertServiceObj.deleteAlert(alertId);
-		verify(alertDao,times(1)).deleteAlert(alertId);	
+		verify(alertDao,times(1)).deleteAlert(alertId);
 	}
-	@Test 
+	@Test
 	public void getAllAlertsTest() throws ClassNotFoundException, SQLException {
 		List<Alert> expected=null;
 		when(alertDao.getAllAlerts()).thenReturn(expected);

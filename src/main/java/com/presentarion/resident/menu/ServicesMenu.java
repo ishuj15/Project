@@ -20,9 +20,9 @@ public class ServicesMenu {
 		while (true) {
 
 			Helper.printFunction(str.residentServices);
-			
+
 				int choice= Helper.choiceInput(7);
-				
+
 
 			switch (choice) {
 			case 1: {

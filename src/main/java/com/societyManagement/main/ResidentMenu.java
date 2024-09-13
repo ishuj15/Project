@@ -20,17 +20,17 @@ public class ResidentMenu {
 
 	public void displayMenu(User user) throws SQLException, ClassNotFoundException, InterruptedException {
 		boolean loggedIn = true;
-		
+
 		while (true) {
 			Helper.printFunction(str.residentMenu);
-			
+
 				int choice= Helper.choiceInput(8);
-				
+
 			switch (choice) {
 			case 1: {
 				loggedIn = residentController.userManagementObj.displayMenu(user);
 				break;
-			} 
+			}
 			case 2: {
 				loggedIn = residentController.noticesMenuObj.displayMenu(user);
 
@@ -38,7 +38,7 @@ public class ResidentMenu {
 			}
 			case 3: {
 				loggedIn = residentController.alertMenuObj.displayMenu(user);
-				
+
 				break;
 			}
 			case 4: {
@@ -68,7 +68,7 @@ public class ResidentMenu {
 			default:
 				Helper.printFunction(str.invalidInput);
 			}
-			if (loggedIn == false)
+			if (!loggedIn)
 			{
 				System.out.println(str.loggingout);
 				Thread.sleep(1000);

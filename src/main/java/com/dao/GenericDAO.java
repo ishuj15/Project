@@ -13,6 +13,7 @@ public abstract class GenericDAO<T> {
 
 	private Connection connection;
 
+
 	public GenericDAO() {
 		try {
 			this.connection = DbConnection.getConnection();

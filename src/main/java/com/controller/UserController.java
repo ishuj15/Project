@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -26,26 +27,27 @@ public class UserController {
 		User user = new User();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		while(true) {  
+		while(true) {
 			Helper.printFunction(str.enterUserName);
 			userName = scanner.nextLine().trim();
 			if (Helper.isUsernameValid(userName)  ) {
-				
+
 				if(userService.getUserByUserName(userName)==null)
 				{
-					break;	
+					break;
+				} else {
+					System.out.println(str.userNameTaken);
 				}
-				else 
-					System.out.println(str.userNameTaken);		
 			}
-		}  
+		}
 		while (true) {
 			System.out.print(str.enterRole);
 			userRole = scanner.nextLine().trim();
-			if (Helper.isUserRoleValid(userRole.toLowerCase()))
+			if (Helper.isUserRoleValid(userRole.toLowerCase())) {
 				break;
-			else
+			} else {
 				System.out.println(str.invalidInput);
+			}
 		}
 		while (true) {
 			System.out.print(str.enterPassword);
@@ -59,18 +61,20 @@ public class UserController {
 		while (true) {
 			System.out.print(str.enterPhoneNo);
 			phoneNo = scanner.nextLine().trim();
-			if (Helper.isPhoneNumberValid(phoneNo))
+			if (Helper.isPhoneNumberValid(phoneNo)) {
 				break;
-			else
+			} else {
 				System.out.println(str.wrongPhoneNo);
+			}
 		}
 		while (true) {
 			System.out.print(str.enterEmail);
 			email = scanner.nextLine().trim();
-			if (Helper.isEmailValid(email))
+			if (Helper.isEmailValid(email)) {
 				break;
-			else
+			} else {
 				System.out.println(str.wrongEmail);
+			}
 
 		}
 		while (true) {
@@ -78,16 +82,16 @@ public class UserController {
 		    address = scanner.nextLine().trim();
 		    if (Helper.notNullCheck(address)) {
 		        break;
-		    } 
-		    else
-		    	System.out.println(str.wrongAddress);
+		    } else {
+				System.out.println(str.wrongAddress);
+			}
 
 		}
 
 		String hashedPassword = Helper.hashPassword(password);
 
 		String userId = Helper.generateUniqueId();
-		
+
 		user.setIdUser(userId);
 		user.setUserName(userName);
 		user.setUserRole(userRole);
@@ -122,27 +126,24 @@ public class UserController {
 
 	public void listUsers() throws SQLException, ClassNotFoundException {
 		List<User> users=userService.getAllUsers();
-		
-		
 		if (users == null || users.isEmpty()) {
 			System.out.println(str.userNotFound);
 			return ;
 		}
+		else
+		{
 		List<String> headers= Arrays.asList( "S.No", "User Name","User Role", "Phone No","Email","Address");
 		List<String> fields= Arrays.asList(  "userName", "userRole", "phoneNo", "email","address");
 		PrintInTable.printTable(users, headers, fields);
+		}
 	}
 
 	public void updateUser(User user) throws SQLException, ClassNotFoundException {
-		
+
 		System.out.println(str.userUpdateList);
 		System.out.println(str.selectUserFieldToUpdate);
-
 		String columnToUpdate = null, newValue = null;
-
-		
 		int	choice = Helper.choiceInput(6);
-			
 		switch (choice) {
 		case 1: {
 			while (true) {
@@ -153,13 +154,11 @@ public class UserController {
 				{
 					if(userService.getUserByUserName(newValue)==null)
 					{
-						break;	
+						break;
+					} else {
+						System.out.println(str.userNameTaken);
 					}
-						else
-							System.out.println(str.userNameTaken);
 				}
-				
-				
 			}
 			break;
 		}
@@ -168,8 +167,9 @@ public class UserController {
 				columnToUpdate = str.password;
 				System.out.print(str.enterPassword);
 				newValue = scanner.nextLine();
-				if (Helper.isPasswordValid(newValue))
+				if (Helper.isPasswordValid(newValue)) {
 					break;
+				}
 			}
 			break;
 		}
@@ -180,9 +180,9 @@ public class UserController {
 				newValue = scanner.nextLine();
 				if (Helper.isPhoneNumberValid(newValue)) {
 					break;
-				}
-				else
+				} else {
 					System.out.println(str.wrongPhoneNo);
+				}
 			}
 			break;
 		}
@@ -192,10 +192,11 @@ public class UserController {
 				columnToUpdate = str.email;
 				System.out.print("Enter new email: ");
 				newValue = scanner.nextLine();
-				if (Helper.isEmailValid(newValue))
+				if (Helper.isEmailValid(newValue)) {
 					break;
-				else
+				} else {
 					System.out.println(str.wrongEmail);
+				}
 			}
 			break;
 		}
@@ -206,9 +207,9 @@ public class UserController {
 				newValue = scanner.nextLine().trim();
 			    if (Helper.notNullCheck(newValue)) {
 			        break;
-			    } 
-			    else
-			    	System.out.println(str.wrongAddress);
+			    } else {
+					System.out.println(str.wrongAddress);
+				}
 
 			}
 			break;
@@ -244,8 +245,7 @@ public class UserController {
 	public static void login() throws SQLException, ClassNotFoundException, InterruptedException {
 
 		try {
-			@SuppressWarnings("resource")
-			Scanner scanner = new Scanner(System.in);
+
 			System.out.println(str.enterLoginDeatils);
 			System.out.print(str.enterUserName);
 
@@ -254,24 +254,24 @@ public class UserController {
 
 			String password = scanner.nextLine().trim();
 			User user= userService.login(userName, password);
-			 
-			 
+
+
 			 if (user == null ) {
-		        	
+
 	        	 System.out.println(str.invalidUserNameOrPassword);
 		            logger.warning("Failed login attempt for username: " + userName);
-	            
-	           
-	        } else { 
+
+
+	        } else {
 	        	System.out.println( str.loginSuccessful+ user.getUserName() + ".");
 	            logger.info("User logged in: " + user.getUserName());
-	           
-	            
+
+
 	            if(user.getUserRole().toLowerCase().equals(str.resident))
 	            {
 	            	ResidentMenu obj= new ResidentMenu();
-	            	
-	            	obj.displayMenu(user);	
+
+	            	obj.displayMenu(user);
 	            }
 	            else if(user.getUserRole().toLowerCase().equals(str.guard)) {
 	            	GuardMenu guardMenu =new GuardMenu();
@@ -279,11 +279,11 @@ public class UserController {
 	            }
 	            else
 	            {
-	            	AdminMenu adminMenuObj= new AdminMenu();	
-	            	adminMenuObj.displayMenu(user); 	
+	            	AdminMenu adminMenuObj= new AdminMenu();
+	            	adminMenuObj.displayMenu(user);
 	            }
 	        }
-			
+
 		} catch (SQLException e) {
 			logger.log(Level.SEVERE, "Login failed due to a database error", e);
 		}
@@ -292,27 +292,31 @@ public class UserController {
 
 	public static  User getUsernameList() throws ClassNotFoundException, SQLException {
 		List<User> users = userService.getAllUsers();
-		int count=0;
+		List<User> userOfResident= new ArrayList<>();
+		int serialNumber=1;
 		if (users == null || users.isEmpty()) {
 			System.out.println(str.userNotFound);
+			return null;
 		} else {
-			
+//			List<String> headers= Arrays.asList( "S.No", "User Name");
+//			List<String> fields= Arrays.asList(  "userName");
+//			PrintInTable.printTable(users, headers, fields);
+//
 			System.out.printf("| %-5s | %-20s |\n", "S.No", "Username");
 			System.out.println("|-------|----------------------|");
 
-			int serialNumber = 1; 
 			for (User user : users) {
 				if(user.getUserRole().equals("resident"))
 				{
-					count++;
+					userOfResident.add(user);
 					System.out.printf("| %-5d | %-20s |\n", serialNumber++, user.getUserName());
 				}
-				
+
 			}
 			System.out.println("|-------|----------------------|");
 		}
-			int choice = Helper.choiceInput(count);
-		User selectedUser = users.get(choice - 1);
+		int choice = Helper.choiceInput(serialNumber);
+		User selectedUser = userOfResident.get(choice - 1);
 		return selectedUser;
 	}
 
@@ -328,6 +332,6 @@ public class UserController {
 			int choice = Helper.choiceInput(users.size());
 		User selectedUser = users.get(choice - 1);
 		return selectedUser;
-		}	
+		}
 	}
 }

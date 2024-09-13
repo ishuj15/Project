@@ -1,8 +1,6 @@
 package com.Model;
 
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Notices implements ModelInterface {
@@ -14,11 +12,19 @@ public class Notices implements ModelInterface {
 	 @Override
 	    public List<String> toRow(List<String> fields) {
 		 List<String> row = new ArrayList<>();
-		 if(fields.contains("title")) row.add(title);
-		 if(fields.contains("message")) row.add(message);
-		 if(fields.contains("date"))  row.add(date);
-		 if(fields.contains("targetRole")) row.add(targetRole);
-		 return row; 
+		 if(fields.contains("title")) {
+			row.add(title);
+		}
+		 if(fields.contains("message")) {
+			row.add(message);
+		}
+		 if(fields.contains("date")) {
+			row.add(date);
+		}
+		 if(fields.contains("targetRole")) {
+			row.add(targetRole);
+		}
+		 return row;
 	    }
 	// Getters and Setters
 	public String getIdNotices() {

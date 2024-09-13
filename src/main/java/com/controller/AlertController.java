@@ -14,7 +14,7 @@ import com.util.str;
 public class AlertController {
 	private AlertService alertService = new AlertService();
 	Scanner scanner = new Scanner(System.in);
- 
+
 	public void createAlert() throws SQLException, ClassNotFoundException {
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
@@ -23,22 +23,24 @@ public class AlertController {
 		while(true)
 		{
 			Helper.printFunction(str.alertMessage);
-			 message = scanner.nextLine(); 
-			if(Helper.notNullCheck(message))
+			 message = scanner.nextLine();
+			if(Helper.notNullCheck(message)) {
 				Helper.printFunction(str.notNullMessage);
-			else
-				break; 
-		} 
-		
+			} else {
+				break;
+			}
+		}
+
 		LocalDate dateStr = LocalDate.now();
 		while(true)
 		{
 			Helper.printFunction(str.alertTargetRole);
 			 targetRole = scanner.nextLine().toLowerCase();
-			 if(Helper.isValidTarget(targetRole.toLowerCase().trim()))
-				 break;
-			 else
-				 System.out.println(str.validTargetRole);
+			 if(Helper.isValidTarget(targetRole.toLowerCase().trim())) {
+				break;
+			} else {
+				System.out.println(str.validTargetRole);
+			}
 		}
 		String alertId = Helper.generateUniqueId();
 		Alert alert = new Alert();
@@ -56,7 +58,7 @@ public class AlertController {
 		if (alerts == null || alerts.isEmpty()) {
 			System.out.println(str.alertNotFound);
 			return ;
-			
+
 		} else {
 			List<String> headers=  Arrays.asList("S.No",  "Message","Date");
 			List<String> fields = Arrays.asList("Message","date");
@@ -74,32 +76,34 @@ public class AlertController {
 			List<String> headers=  Arrays.asList("S.No", "Role", "Message","Date");
 			List<String> fields = Arrays.asList("Message","targetRole","date");
 			PrintInTable.printTable(alerts, headers,fields);
-	
 		}
 	}
 	public void updateAlert() throws SQLException, ClassNotFoundException {
-		Scanner scanner = new Scanner(System.in) ;
+
 			Alert alert = getAlert();
 			if (alert == null) {
 				System.out.println(str.alertNotFound);
+				scanner.close();
+				return ;
 			} else {
 				String idAlert = alert.getIdAlert();
-				
+
 				System.out.println(str.alertUpdateList);
 				System.out.println(str.alertUpdatefield);
 				int choice = Helper.choiceInput(4);
-					
-				switch (choice) { 
+
+				switch (choice) {
 				case 1: {
 					String message ;
 					while(true)
 					{
 						Helper.printFunction(str.alertMessage);
 						 message = scanner.nextLine();
-						if(Helper.notNullCheck(message))
+						if(Helper.notNullCheck(message)) {
 							break;
-						else
+						} else {
 							Helper.printFunction(str.notNullMessage);
+						}
 					}
 					alertService.updateAlert(idAlert, "message", message);
 					System.out.println(str.alertUpdated);
@@ -111,17 +115,19 @@ public class AlertController {
 					{
 						Helper.printFunction(str.alertTargetRole);
 						 targetRole = scanner.nextLine().trim();
-						 if(Helper.isValidTarget(targetRole))
-							 break;
-						 else
-							 System.out.println(str.validTargetRole);
+						 if(Helper.isValidTarget(targetRole)) {
+							break;
+						} else {
+							System.out.println(str.validTargetRole);
+						}
 					}
-					
+
 					alertService.updateAlert(idAlert, "targetRole", targetRole);
 					System.out.println(str.alertUpdated);
 					break;
 				}
 				case 3: {
+					scanner.close();
 					return;
 				}
 				case 4:
@@ -133,16 +139,21 @@ public class AlertController {
 				default:
 					System.out.println(str.invalidInput);
 				}
-
-			
+				scanner.close();
 		}
 	}
 
 	public void deleteAlert() throws SQLException, ClassNotFoundException {
 		Alert alert = getAlert();
-		
+		if (alert == null) {
+			System.out.println(str.alertNotFound);
+			return ;
+		}
+		else
+		{
 		alertService.deleteAlert(alert.getIdAlert());
 		System.out.println(str.alertDeleted);
+		}
 	}
 
 	public Alert getAlert() throws ClassNotFoundException, SQLException {
@@ -151,7 +162,9 @@ public class AlertController {
 		if (alerts == null) {
 			System.out.println(str.alertNotFound);
 			return null;
-		} 
+		}
+		else
+		{
 		listAlerts();
 		System.out.println(str.selectAlert);
 		while (true) {
@@ -159,6 +172,6 @@ public class AlertController {
 			return alerts.get(choice - 1);
 
 		}
-
+		}
 	}
 }

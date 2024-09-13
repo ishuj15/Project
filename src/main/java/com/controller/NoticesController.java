@@ -24,31 +24,34 @@ public class NoticesController {
 		{
 			System.out.print(str.noticeTitle);
 			title = scanner.nextLine().trim();
-			if(Helper.notNullCheck(title))
+			if(Helper.notNullCheck(title)) {
 				System.out.println(str.notNullNoticeTitle);
-			else
+			} else {
 				break;
-		} 
-		while(true) 
+			}
+		}
+		while(true)
 		{
 			System.out.println(str.noticeMessage);
-			
+
 			message = scanner.nextLine().trim();
-			if(Helper.notNullCheck(message))
+			if(Helper.notNullCheck(message)) {
 				System.out.println(str.notNullMessage);
-			else
+			} else {
 				break;
+			}
 		}
-		
+
 		LocalDate currentDate = LocalDate.now();
-		while(true) 
+		while(true)
 		{
 			System.out.print(str.alertTargetRole);
 			 targetRole = scanner.nextLine().trim().toLowerCase();
-			if(Helper.isValidTarget(targetRole))
+			if(Helper.isValidTarget(targetRole)) {
 				break;
+			}
 		}
-		
+
 		String noticeId = Helper.generateUniqueId();
 
 		Notices notice = new Notices();
@@ -90,12 +93,14 @@ public class NoticesController {
 
 	public void updateNotice() throws SQLException, ClassNotFoundException {
 		Notices notice = getNotice();
- 
+
 		if (notice == null)
+		{
 			System.out.println(str.noticeNotFound);
+		}
 		else {
 			String idNotice = notice.getIdNotices();
-			
+
 			System.out.println(str.noticeUpdateList);
 			System.out.println(str.selectUpdate);
 			int choice = Helper.choiceInput(5);
@@ -106,10 +111,11 @@ public class NoticesController {
 				{
 					System.out.print(str.noticeTitle);
 					title = scanner.nextLine().trim();
-					if(Helper.notNullCheck(title))
+					if(Helper.notNullCheck(title)) {
 						break;
-					else
+					} else {
 						System.out.println(str.notNullNoticeTitle);
+					}
 				}
 				noticesService.updateNotice(idNotice, "title", title);
 				System.out.println(str.noticeUpdatedSuccessfully);
@@ -120,12 +126,13 @@ public class NoticesController {
 				while(true)
 				{
 					System.out.println(str.noticeMessage);
-					
+
 					message = scanner.nextLine().trim();
-					if(Helper.notNullCheck(message))
+					if(Helper.notNullCheck(message)) {
 						break;
-					else
-						System.out.println(str.notNullMessage);		
+					} else {
+						System.out.println(str.notNullMessage);
+					}
 				}
 				noticesService.updateNotice(idNotice, "message", message);
 				System.out.println(str.noticeUpdatedSuccessfully);
@@ -137,9 +144,10 @@ public class NoticesController {
 				{
 					System.out.print(str.alertTargetRole);
 					 targetRole = scanner.nextLine().trim().toLowerCase();
-					if(Helper.isValidTarget(targetRole))
+					if(Helper.isValidTarget(targetRole)) {
 						break;
-					
+					}
+
 				}
 				noticesService.updateNotice(idNotice, "targetRole", targetRole);
 				System.out.println(str.noticeUpdatedSuccessfully);
@@ -161,8 +169,17 @@ public class NoticesController {
 	}
 	public void deleteNotice() throws SQLException, ClassNotFoundException {
 		Notices notice = getNotice();
+		if( notice==null)
+		{
+			System.out.println(str.noticeNotFound);
+
+			return ;
+		}
+		else
+		{
 		noticesService.deleteNotice(notice.getIdNotices());
 		System.out.println(str.noticeDeleteSuccessfully);
+	}
 	}
 	public Notices getNotice() throws ClassNotFoundException, SQLException {
 
@@ -173,10 +190,13 @@ public class NoticesController {
 
 			return null;
 		}
+		else
+		{
 		listNotices();
 		System.out.println(str.selectNotice);
 		int choice = Helper.choiceInput(notices.size());
-			
+
 		return notices.get(choice - 1);
+		}
 	}
 }

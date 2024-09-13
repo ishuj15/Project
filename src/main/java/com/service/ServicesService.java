@@ -20,7 +20,7 @@ public class ServicesService {
 	public List<Services> getServiceById(String idUser) throws SQLException, ClassNotFoundException {
 		return servicesDAO.getServiceById(idUser);
 	}
- 
+
 	public List<Services> getAllServices() throws SQLException, ClassNotFoundException {
 		return servicesDAO.getAllServices();
 	}

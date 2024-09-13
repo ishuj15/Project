@@ -20,11 +20,11 @@ public class AccontManagementAdmin {
 	public boolean displayMenu(User user) throws SQLException, ClassNotFoundException {
 
 		while (true) {
-			
+
 			Helper.printFunction(str.accountManagementAdmin);
-			
+
 				int choice= Helper.choiceInput(8);
-				
+
 
 			switch (choice) {
 			case 1: {
