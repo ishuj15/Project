@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.Model.User;
-import com.service.UserService;
+import com.service.implementation.UserService;
 import com.societyManagement.main.AdminMenu;
 import com.societyManagement.main.GuardMenu;
 import com.societyManagement.main.ResidentMenu;
@@ -17,11 +17,12 @@ import com.util.FileLogging;
 import com.util.Helper;
 import com.util.PrintInTable;
 import com.util.str;
+import com.serviceInterface.UserServiceInterface;
 
 public class UserController {
-	private static Logger logger  = FileLogging.getLogger(UserController.class);
+	//private static Logger logger  = FileLogging.getLogger(UserController.class);
 	private static Scanner scanner= new Scanner(System.in);
-	public  static  UserService userService = new UserService();
+	public  static  UserServiceInterface userService = new UserService();
 	public static void createUser() throws SQLException, ClassNotFoundException {
 		String password, userRole, phoneNo, email, userName,address;
 		User user = new User();
@@ -31,7 +32,6 @@ public class UserController {
 			Helper.printFunction(str.enterUserName);
 			userName = scanner.nextLine().trim();
 			if (Helper.isUsernameValid(userName)  ) {
-
 				if(userService.getUserByUserName(userName)==null)
 				{
 					break;
@@ -259,12 +259,12 @@ public class UserController {
 			 if (user == null ) {
 
 	        	 System.out.println(str.invalidUserNameOrPassword);
-		            logger.warning("Failed login attempt for username: " + userName);
+		            //logger.warning("Failed login attempt for username: " + userName);
 
 
 	        } else {
 	        	System.out.println( str.loginSuccessful+ user.getUserName() + ".");
-	            logger.info("User logged in: " + user.getUserName());
+	           // logger.info("User logged in: " + user.getUserName());
 
 
 	            if(user.getUserRole().toLowerCase().equals(str.resident))
@@ -285,7 +285,7 @@ public class UserController {
 	        }
 
 		} catch (SQLException e) {
-			logger.log(Level.SEVERE, "Login failed due to a database error", e);
+			//logger.log(Level.SEVERE, "Login failed due to a database error", e);
 		}
 
 	}

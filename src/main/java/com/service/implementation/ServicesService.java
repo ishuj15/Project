@@ -1,13 +1,15 @@
- package com.service;
+ package com.service.implementation;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.Services;
-import com.dao.ServicesDAO;
+import com.dao.implementation.ServicesDAO;
+import com.daoInterface.ServiceInterface;
+import com.serviceInterface.ServicesServiceInterface;
 
-public class ServicesService {
-	private  ServicesDAO servicesDAO;
+public class ServicesService implements ServicesServiceInterface {
+	private  ServiceInterface servicesDAO;
 
 	public ServicesService() {
 		this.servicesDAO = new ServicesDAO();

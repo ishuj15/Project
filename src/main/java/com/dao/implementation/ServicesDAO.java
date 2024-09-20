@@ -1,12 +1,13 @@
-package com.dao;
+package com.dao.implementation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.Services;
+import com.daoInterface.ServiceInterface;
 
-public class ServicesDAO extends GenericDAO<Services> {
+public class ServicesDAO extends GenericDAO<Services> implements ServiceInterface{
 //	public ServicesDAO()
 //	{
 //		super();

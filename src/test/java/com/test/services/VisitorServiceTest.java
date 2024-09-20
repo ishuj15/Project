@@ -17,8 +17,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.Visitor;
-import com.dao.VisitorDAO;
-import com.service.VisitorService;
+import com.dao.implementation.VisitorDAO;
+import com.service.implementation.VisitorService;
 @ExtendWith(MockitoExtension.class)
 class VisitorServiceTest {
 

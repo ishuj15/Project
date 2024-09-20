@@ -19,8 +19,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.User;
-import com.dao.UserDAO;
-import com.service.UserService;
+import com.dao.implementation.UserDAO;
+import com.service.implementation.UserService;
 import com.util.Helper;
 
 @ExtendWith(MockitoExtension.class)

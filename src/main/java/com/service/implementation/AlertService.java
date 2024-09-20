@@ -1,13 +1,15 @@
-package com.service;
+package com.service.implementation;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.Alert;
-import com.dao.AlertDAO;
+import com.dao.implementation.AlertDAO;
+import com.daoInterface.AlertInterface;
+import com.serviceInterface.AlertServiceInterface;
 
-public class AlertService {
-	private AlertDAO alertDAO = new AlertDAO();
+public class AlertService implements AlertServiceInterface  {
+	private AlertInterface alertDAO = new AlertDAO();
 
 	public void addAlert(Alert alert) throws SQLException, ClassNotFoundException {
 		alertDAO.addAlert(alert);

@@ -1,12 +1,13 @@
-package com.dao;
+package com.dao.implementation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.Complaint;
+import com.daoInterface.ComplaintInterface;
 
-public class ComplaintDAO extends GenericDAO<Complaint> {
+public class ComplaintDAO extends GenericDAO<Complaint> implements ComplaintInterface{
 
 	@Override
 	protected Complaint mapResultSetToEntity(ResultSet resultSet) throws SQLException {

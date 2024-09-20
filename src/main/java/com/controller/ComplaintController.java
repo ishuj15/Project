@@ -1,4 +1,5 @@
 package com.controller;
+import com.serviceInterface.ComplaintServiceInterface;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -8,13 +9,13 @@ import java.util.Scanner;
 
 import com.Model.Complaint;
 import com.Model.User;
-import com.service.ComplaintService;
+import com.service.implementation.ComplaintService;
 import com.util.Helper;
 import com.util.PrintInTable;
 import com.util.str;
 
 public class ComplaintController {
-	private ComplaintService complaintService = new ComplaintService();
+	private ComplaintServiceInterface complaintService = new ComplaintService();
 	Scanner scanner = new Scanner(System.in);
 
 	public void createComplaint(User user) throws SQLException, ClassNotFoundException {

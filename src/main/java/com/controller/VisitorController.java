@@ -6,10 +6,11 @@ import java.sql.Time;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import com.serviceInterface.VisitorServiceInterface;
 
 import com.Model.User;
 import com.Model.Visitor;
-import com.service.VisitorService;
+import com.service.implementation.VisitorService;
 import com.util.Helper;
 import com.util.PrintInTable;
 import com.util.str;
@@ -17,7 +18,7 @@ import com.util.str;
 public class VisitorController {
 	private final UserController userController=new UserController();
 
-	private final VisitorService visitorService = new VisitorService();
+	private final VisitorServiceInterface visitorService = new VisitorService();
 	private static Scanner scanner = new Scanner(System.in);
 
 	public void createVisitor(User user, String apr) throws SQLException, ClassNotFoundException {

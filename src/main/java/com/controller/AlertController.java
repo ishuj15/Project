@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.Model.Alert;
-import com.service.AlertService;
+import com.service.implementation.AlertService;
+import com.serviceInterface.AlertServiceInterface;
 import com.util.Helper;
 import com.util.PrintInTable;
 import com.util.str;
 public class AlertController {
-	private AlertService alertService = new AlertService();
+	private AlertServiceInterface alertService = new AlertService();
 	Scanner scanner = new Scanner(System.in);
 
 	public void createAlert() throws SQLException, ClassNotFoundException {

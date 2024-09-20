@@ -1,12 +1,13 @@
-package com.dao;
+package com.dao.implementation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.Visitor;
+import com.daoInterface.VisitorInterface;
 
-public class VisitorDAO extends GenericDAO<Visitor> {
+public class VisitorDAO extends GenericDAO<Visitor> implements VisitorInterface {
 
 	@Override
 	protected Visitor mapResultSetToEntity(ResultSet resultSet) throws SQLException {

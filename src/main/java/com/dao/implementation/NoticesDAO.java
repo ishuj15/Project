@@ -1,17 +1,18 @@
-package com.dao;
+package com.dao.implementation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.Notices;
+import com.daoInterface.NoticeInterface;
 
-public class NoticesDAO extends GenericDAO<Notices> {
+public class NoticesDAO extends GenericDAO<Notices> implements NoticeInterface {
 
 	@Override
 	protected Notices mapResultSetToEntity(ResultSet resultSet) throws SQLException {
 		Notices notice = new Notices();
-		notice.setIdNotices(resultSet.getString("IdNotices"));
+			notice.setIdNotices(resultSet.getString("idNotices"));
 		notice.setTitle(resultSet.getString("title"));
 		notice.setMessage(resultSet.getString("message"));
 		notice.setDate(resultSet.getString("date"));
@@ -29,7 +30,8 @@ public class NoticesDAO extends GenericDAO<Notices> {
 	}
 
 	public List<Notices> getNoticeByRole(String role) throws SQLException, ClassNotFoundException {
-		String sqlQuery = "SELECT * FROM notices WHERE targetRole = \"" + role + "\"";
+		String sqlQuery = String.format("SELECT * FROM notices WHERE targetRole = '%s' OR targetRole = 'all'",role);
+
 		return executeGetAllQuery(sqlQuery);
 	}
 

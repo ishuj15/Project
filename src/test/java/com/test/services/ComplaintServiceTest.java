@@ -17,8 +17,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.Complaint;
-import com.dao.ComplaintDAO;
-import com.service.ComplaintService;
+import com.dao.implementation.ComplaintDAO;
+import com.service.implementation.ComplaintService;
 
 @ExtendWith(MockitoExtension.class)
 class ComplaintServiceTest {

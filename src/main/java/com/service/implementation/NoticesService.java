@@ -1,13 +1,15 @@
-package com.service;
+package com.service.implementation;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.Notices;
-import com.dao.NoticesDAO;
+import com.dao.implementation.NoticesDAO;
+import com.daoInterface.NoticeInterface;
+import com.serviceInterface.NoticesServiceInterface;
 
-public class NoticesService {
-	private NoticesDAO noticesDAO;
+public class NoticesService implements NoticesServiceInterface {
+	private NoticeInterface noticesDAO;
 
 	public NoticesService() {
 		this.noticesDAO = new NoticesDAO();

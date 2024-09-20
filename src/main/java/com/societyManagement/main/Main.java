@@ -16,20 +16,15 @@ public class Main {
 				Helper.printFunction(str.mainMenu);
 				int choice =  Helper.choiceInput(3);
 				switch (choice) {
-				case 1: {
-					UserController.createUser();
-					break;
-				}
-				case 2: {
-					UserController.login();
-					break;
-				}
-				case 3: {
+				case 1-> UserController.createUser();
+				case 2->UserController.login();
+					
+				case 3-> {
 					scanner.close();
 					System.exit(0);
 					return;
-				}
-				default:
+				} 
+				default->
 					Helper.printFunction(str.invalidInput);
 				}
 			}

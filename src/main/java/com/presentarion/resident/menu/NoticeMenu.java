@@ -26,7 +26,7 @@ public class NoticeMenu {
 
 			switch (choice) {
 			case 1: {
-				noticesController.viewNotice(str.resident);
+				noticesController.listNotices(str.resident);
 				break;
 			}
 			case 2: {

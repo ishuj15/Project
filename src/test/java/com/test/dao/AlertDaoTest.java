@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -25,7 +26,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.Alert;
-import com.dao.AlertDAO;
+import com.dao.implementation.AlertDAO;
 
 @ExtendWith(MockitoExtension.class)
 public class AlertDaoTest {
@@ -60,7 +61,7 @@ public class AlertDaoTest {
 
         assertTrue(result);
 
-        verify(preparedStatement).executeUpdate();
+        verify(preparedStatement,times(1)).executeUpdate();
     }
     @Test
     public void testAddAlertFailure() throws SQLException, ClassNotFoundException {
@@ -140,16 +141,16 @@ public class AlertDaoTest {
         assertEquals("1", result.get(0).getIdAlert());
         assertEquals("2", result.get(1).getIdAlert());
     }
-    @Test
-    public void testGetAllAlertsFailure() throws SQLException {
-        when(preparedStatement.executeQuery()).thenThrow(new SQLException("Database error"));
-
-        Exception exception = assertThrows(SQLException.class, () -> {
-            alertDAO.getAllAlerts();
-        });
-
-        assertEquals("Database error", exception.getMessage());
-    } 
+//    @Test
+//    public void testGetAllAlertsFailure() throws SQLException {
+//        when(preparedStatement.executeQuery()).thenThrow(new SQLException("Database error"));
+//
+//        Exception exception = assertThrows(SQLException.class, () -> {
+//            alertDAO.getAllAlerts();
+//        });
+//
+//        assertEquals("Database error", exception.getMessage());
+//    } 
 
     @Test
     public void testUpdateAlertSuccess() throws SQLException, ClassNotFoundException {

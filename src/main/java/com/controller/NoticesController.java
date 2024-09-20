@@ -5,9 +5,10 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import com.serviceInterface.NoticesServiceInterface;
 
 import com.Model.Notices;
-import com.service.NoticesService;
+import com.service.implementation.NoticesService;
 import com.util.Helper;
 import com.util.PrintInTable;
 import com.util.str;
@@ -15,7 +16,7 @@ import com.util.str;
 public class NoticesController {
 
 	Scanner scanner = new Scanner(System.in);
-	private final NoticesService noticesService = new NoticesService();
+	private final NoticesServiceInterface noticesService = new NoticesService();
 
 	public void createNotice() throws SQLException, ClassNotFoundException {
 		String message=null,title=null;
@@ -29,7 +30,7 @@ public class NoticesController {
 			} else {
 				break;
 			}
-		}
+		} 
 		while(true)
 		{
 			System.out.println(str.noticeMessage);
@@ -65,11 +66,11 @@ public class NoticesController {
 		System.out.println(str.noticeCreatedSuccefully);
 	}
 
-	public void viewNotice(String role) throws SQLException, ClassNotFoundException {
+	public void listNotices(String role) throws SQLException, ClassNotFoundException {
 		List<Notices> notices = noticesService.getNoticeByRole(role);
 
 		if (notices == null || notices.isEmpty()) {
-			System.out.println("for role: " + role);
+			System.out.println(str.noticeNotFound);
 			return;
 		} else {
 			List<String> headers= Arrays.asList( "S.No", "Title", "Message", "Date");

@@ -1,13 +1,15 @@
-package com.service;
+package com.service.implementation;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.Complaint;
-import com.dao.ComplaintDAO;
+import com.dao.implementation.ComplaintDAO;
+import com.daoInterface.ComplaintInterface;
+import com.serviceInterface.ComplaintServiceInterface;
 
-public class ComplaintService {
-	private ComplaintDAO complaintDAO = new ComplaintDAO();
+public class ComplaintService  implements ComplaintServiceInterface{
+	private ComplaintInterface complaintDAO = new ComplaintDAO();
 
 	public void addComplaint(Complaint complaint) throws SQLException, ClassNotFoundException {
 		complaintDAO.addComplaint(complaint);

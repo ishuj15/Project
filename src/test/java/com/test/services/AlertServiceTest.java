@@ -16,8 +16,9 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.Alert;
-import com.dao.AlertDAO;
-import com.service.AlertService;
+import com.dao.implementation.AlertDAO;
+import com.service.implementation.AlertService;
+import com.util.str;
 @ExtendWith(MockitoExtension.class)
 public class AlertServiceTest {
 	@Mock
@@ -42,7 +43,6 @@ public class AlertServiceTest {
 		alertServiceObj.addAlert(alert);
 		verify(alertDao, times(1)).addAlert(alert);
 	}
-
 
 	@Test
 	public void updateAlertTest() throws ClassNotFoundException, SQLException {
@@ -72,8 +72,8 @@ public class AlertServiceTest {
 	@Test
 	public void  getAlertByRoleTest() throws ClassNotFoundException, SQLException {
 		List<Alert> expected=null;
-		when(alertDao.getAlertByRole("all")).thenReturn(expected);
-		alertServiceObj.getAlertByRole("all");
-		verify(alertDao,times(1)).getAlertByRole("all");
+		when(alertDao.getAlertByRole(str.resident)).thenReturn(expected);
+		alertServiceObj.getAlertByRole(str.resident);
+		verify(alertDao,times(1)).getAlertByRole(str.resident);
 	}
 }

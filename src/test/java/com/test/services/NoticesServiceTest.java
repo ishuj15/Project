@@ -16,8 +16,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.Notices;
-import com.dao.NoticesDAO;
-import com.service.NoticesService;
+import com.dao.implementation.NoticesDAO;
+import com.service.implementation.NoticesService;
 @ExtendWith(MockitoExtension.class)
 public class NoticesServiceTest {
 	@Mock

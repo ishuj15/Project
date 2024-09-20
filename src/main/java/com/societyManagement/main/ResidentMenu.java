@@ -1,5 +1,4 @@
 package com.societyManagement.main;
-
 import java.sql.SQLException;
 import java.util.Scanner;
 

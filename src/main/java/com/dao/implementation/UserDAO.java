@@ -1,12 +1,13 @@
-package com.dao;
+package com.dao.implementation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.User;
+import com.daoInterface.UserInterface;
 
-public class UserDAO extends GenericDAO<User> {
+public class UserDAO extends GenericDAO<User> implements UserInterface {
 
 
 	@Override
@@ -21,7 +22,6 @@ public class UserDAO extends GenericDAO<User> {
 		user.setAddress(resultSet.getString("address"));
 		return user;
 	}
-
 	public boolean addUser(User user) throws SQLException, ClassNotFoundException {
 		String sqlQuery = String.format(
 				"INSERT INTO User ( idUser, userName,  userRole, password,phoneNo,email,address) VALUES ('%s','%s','%s','%s', '%s','%s','%s')",
@@ -37,9 +37,7 @@ public class UserDAO extends GenericDAO<User> {
 
 	public User getUserByUserName(String userName) throws SQLException, ClassNotFoundException {
 		String sqlQuery = "SELECT * FROM user WHERE userName = \"" + userName + "\"";
-
 		return executeGetQuery(sqlQuery);
-
 	}
 
 	public boolean deleteUser(String userId) throws SQLException, ClassNotFoundException {

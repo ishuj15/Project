@@ -1,14 +1,16 @@
-package com.service;
+package com.service.implementation;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.User;
-import com.dao.UserDAO;
+import com.dao.implementation.UserDAO;
+import com.daoInterface.UserInterface;
+import com.serviceInterface.UserServiceInterface;
 import com.util.Helper;
 
-public class UserService {
-	public  UserDAO userDAO = new UserDAO();
+public class UserService implements UserServiceInterface {
+	public  UserInterface userDAO = new UserDAO();
 	//private static Logger logger = FileLogging.getLogger(UserController.class);
 
 	public  boolean verifyPassword(String enteredPassword, String storedHashedPassword) {
@@ -22,7 +24,6 @@ public class UserService {
 
 	public User getUserByUserName(String userName) throws SQLException, ClassNotFoundException {
 		User user=userDAO.getUserByUserName(userName);
-
 			return user;
 	}
 

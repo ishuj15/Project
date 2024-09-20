@@ -1,12 +1,13 @@
-package com.dao;
+package com.dao.implementation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.Alert;
+import com.daoInterface.AlertInterface;
 
-public class AlertDAO extends GenericDAO<Alert> {
+public class AlertDAO extends GenericDAO<Alert> implements AlertInterface {
 
 	@Override
 	protected Alert mapResultSetToEntity(ResultSet resultSet) throws SQLException {
@@ -19,7 +20,7 @@ public class AlertDAO extends GenericDAO<Alert> {
 		return alert;
 	}
 
-	public boolean addAlert(Alert alert) throws SQLException, ClassNotFoundException {
+	public boolean addAlert(Alert alert) throws ClassNotFoundException, SQLException {
 		String sqlQuery = String.format(
 				"INSERT INTO alert (idAlert,  message, date,targetRole) VALUES ('%s','%s','%s','%s')",
 				alert.getIdAlert(), alert.getMessage(), alert.getDate(), alert.getTargetRole());
@@ -30,7 +31,7 @@ public class AlertDAO extends GenericDAO<Alert> {
 
 		return executeGetAllQuery(sqlQuery);
 	}
-
+ 
 	public List<Alert> getAllAlerts() throws SQLException, ClassNotFoundException {
 		String sqlQuery = "SELECT * FROM alert";
 		return executeGetAllQuery(sqlQuery);

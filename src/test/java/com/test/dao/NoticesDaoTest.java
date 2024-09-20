@@ -24,7 +24,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.Notices;
-import com.dao.NoticesDAO;
+import com.dao.implementation.NoticesDAO;
 
 @ExtendWith(MockitoExtension.class)
 public class NoticesDaoTest {

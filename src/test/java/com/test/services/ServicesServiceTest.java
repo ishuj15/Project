@@ -17,8 +17,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.Services;
-import com.dao.ServicesDAO;
-import com.service.ServicesService;
+import com.dao.implementation.ServicesDAO;
+import com.service.implementation.ServicesService;
 @ExtendWith(MockitoExtension.class)
 class ServicesServiceTest {
 	@Mock

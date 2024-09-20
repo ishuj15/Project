@@ -24,7 +24,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.User;
-import com.dao.UserDAO;
+import com.dao.implementation.UserDAO;
 
 @ExtendWith(MockitoExtension.class)
 public class UserDAOTest {

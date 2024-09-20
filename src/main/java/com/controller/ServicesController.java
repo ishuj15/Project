@@ -4,10 +4,11 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import com.serviceInterface.ServicesServiceInterface;
 
 import com.Model.Services;
 import com.Model.User;
-import com.service.ServicesService;
+import com.service.implementation.ServicesService;
 import com.util.Helper;
 import com.util.PrintInTable;
 import com.util.str;
@@ -15,7 +16,7 @@ import com.util.str;
 public class ServicesController {
 	Scanner scanner = new Scanner(System.in);
 
-	private final ServicesService servicesService = new ServicesService();
+	private final ServicesServiceInterface servicesService = new ServicesService();
 
 	public void createService(User user) throws SQLException, ClassNotFoundException {
 

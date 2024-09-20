@@ -11,7 +11,6 @@ public class PrintInTable {
 		for (int i = 0; i < columnWidth.length; i++) {
 			columnWidth[i] = headers.get(i).length();
 		}
-
 		for (T row : data) {
 			List<String> rowData = row.toRow(fields);
 			for (int i = 0; i < rowData.size(); i++) {
@@ -29,7 +28,6 @@ public class PrintInTable {
 			serialNumber++;
 		}
 	}
-
 	private static void printSepartor(int[] columnWidth) {
 
 		for (int width : columnWidth) {
@@ -40,14 +38,10 @@ public class PrintInTable {
 		}
 		System.out.println("+");
 	}
-
 	private static void printRow(List<String> row, int[] columnWidth) {
-		// TODO Auto-generated method stub
 		for (int i = 0; i < row.size(); i++) {
 			System.out.printf("| %-" + columnWidth[i] + "s ", row.get(i));
 		}
 		System.out.println("|");
-
 	}
-
 }

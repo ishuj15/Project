@@ -1,13 +1,15 @@
-package com.service;
+package com.service.implementation;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.Model.Visitor;
-import com.dao.VisitorDAO;
+import com.dao.implementation.VisitorDAO;
+import com.daoInterface.VisitorInterface;
+import com.serviceInterface.VisitorServiceInterface;
 
-public class VisitorService {
-	private  VisitorDAO visitorDAO;
+public class VisitorService  implements VisitorServiceInterface {
+	private  VisitorInterface visitorDAO;
 
 	public VisitorService() {
 		this.visitorDAO = new VisitorDAO();

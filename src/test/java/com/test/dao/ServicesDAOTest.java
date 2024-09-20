@@ -24,7 +24,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.Model.Services;
-import com.dao.ServicesDAO;
+import com.dao.implementation.ServicesDAO;
 
 @ExtendWith(MockitoExtension.class)
 public class ServicesDAOTest {

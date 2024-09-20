@@ -1,4 +1,4 @@
-package com.dao;
+package com.dao.implementation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,6 @@ import com.config.DbConnection;
 public abstract class GenericDAO<T> {
 
 	private Connection connection;
-
 
 	public GenericDAO() {
 		try {
