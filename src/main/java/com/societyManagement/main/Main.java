@@ -6,10 +6,12 @@ import java.util.Scanner;
 
 import com.controller.UserController;
 import com.util.Helper;
+import com.util.MovingAlertThread;
 import com.util.str;
 
 public class Main {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		
 		try (Scanner scanner = new Scanner(System.in)) {
 			while (true) {
 				Helper.printFunction(str.welcomeMessage);

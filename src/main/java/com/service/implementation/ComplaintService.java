@@ -19,7 +19,7 @@ public class ComplaintService  implements ComplaintServiceInterface{
 		return complaintDAO.getComplaintById(userId);
 	}
 
-	public List<Complaint> getAllComplaints() throws SQLException, ClassNotFoundException {
+	public List<Complaint> listComplaints() throws SQLException, ClassNotFoundException {
 		return complaintDAO.getAllComplaints();
 	}
 

@@ -58,7 +58,7 @@ public class ComplaintController {
 	}
 	}
 	public void listComplaints() throws SQLException, ClassNotFoundException {
-		List<Complaint> complaints = complaintService.getAllComplaints();
+		List<Complaint> complaints = complaintService.listComplaints();
 		if (complaints.isEmpty()) {
 			System.out.println(str.complaintNotFound);
 			return ;
@@ -150,7 +150,7 @@ public class ComplaintController {
 	}
 	}
 	public Complaint getComplaint() throws ClassNotFoundException, SQLException {
-		List<Complaint> complaints = complaintService.getAllComplaints();
+		List<Complaint> complaints = complaintService.listComplaints();
 		 if(complaints.equals(null) || complaints.isEmpty())
 		 {
 			 System.out.println(str.complaintNotFound);

@@ -61,7 +61,7 @@ class ComplaintServiceTest {
 	{
 		List<Complaint> expected=null;
 		when(complaintDao.getAllComplaints()).thenReturn(expected);
-		complaintServiceObj.getAllComplaints();
+		complaintServiceObj.listComplaints();
 		verify(complaintDao,times(1)).getAllComplaints();
 	}
 	@Test

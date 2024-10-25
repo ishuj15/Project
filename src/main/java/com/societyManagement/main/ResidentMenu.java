@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.Model.User;
 import com.presentarion.resident.menu.ResidentController;
 import com.util.Helper;
+import com.util.MovingAlertThread;
 import com.util.str;
 
 public class ResidentMenu {
@@ -19,11 +20,13 @@ public class ResidentMenu {
 
 	public void displayMenu(User user) throws SQLException, ClassNotFoundException, InterruptedException {
 		boolean loggedIn = true;
+		Thread thread= new Thread(new MovingAlertThread());
+		thread.start();
 
 		while (true) {
 			Helper.printFunction(str.residentMenu);
-
 				int choice= Helper.choiceInput(8);
+				thread.interrupt();
 
 			switch (choice) {
 			case 1: {
