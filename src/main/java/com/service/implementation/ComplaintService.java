@@ -35,6 +35,7 @@ public class ComplaintService  implements ComplaintServiceInterface{
 	}	
 	}
 
+<<<<<<< HEAD
 	public void getAllComplaints() throws SQLException, ClassNotFoundException {
 		
 		
@@ -64,6 +65,10 @@ public class ComplaintService  implements ComplaintServiceInterface{
 		}
 		
 		
+=======
+	public List<Complaint> listComplaints() throws SQLException, ClassNotFoundException {
+		return complaintDAO.getAllComplaints();
+>>>>>>> ac87088cf150d40ca3353aac3d1ea1f36ac98ad6
 	}
 
 	public void deleteComplaint() throws SQLException, ClassNotFoundException {
