@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.Model.User;
 import com.controller.MasterController;
+import com.controller.UserController;
 import com.util.Helper;
 import com.util.str;
 
@@ -19,18 +20,16 @@ public class UserManagementMenu {
 	}
 
 	public boolean displayMenu(User user) throws SQLException, ClassNotFoundException {
-		// boolean loggedIn;
+		
 		while (true) {
-			// System.out.println(user.getIdUser());
-
+		
 			Helper.printFunction(str.manageAccount);
 
 				int choice= Helper.choiceInput(6);
 
-
 			switch (choice) {
 			case 1: {
-				masterController.userController.deleteUser(user);
+				UserController.deleteUser(user);
 				return false;
 
 			}

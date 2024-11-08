@@ -59,21 +59,21 @@ public class AlertServiceTest {
 		String alertId="123";
 		when(alertDao.deleteAlert(alertId)).thenReturn(true);
 
-		alertServiceObj.deleteAlert(alertId);
+		alertServiceObj.deleteAlert();
 		verify(alertDao,times(1)).deleteAlert(alertId);
 	}
 	@Test
 	public void getAllAlertsTest() throws ClassNotFoundException, SQLException {
 		List<Alert> expected=null;
 		when(alertDao.getAllAlerts()).thenReturn(expected);
-		alertServiceObj.getAllAlerts();
+		alertServiceObj.listAlerts();
 		verify(alertDao,times(1)).getAllAlerts();
 	}
 	@Test
 	public void  getAlertByRoleTest() throws ClassNotFoundException, SQLException {
 		List<Alert> expected=null;
 		when(alertDao.getAlertByRole(str.resident)).thenReturn(expected);
-		alertServiceObj.getAlertByRole(str.resident);
+		alertServiceObj.listAlerts(str.resident);
 		verify(alertDao,times(1)).getAlertByRole(str.resident);
 	}
 }

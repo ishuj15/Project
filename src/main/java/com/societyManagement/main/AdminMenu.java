@@ -55,7 +55,7 @@ public class AdminMenu {
 				Thread.sleep(1000);
 				return false;
 			}
-			case 9: {
+			case 8: {
 				scanner.close();
 				System.exit(0);
 				return false;

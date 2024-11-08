@@ -1,21 +1,13 @@
 package com.controller;
 
+import java.io.Console;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.Model.User;
 import com.service.implementation.UserService;
-import com.societyManagement.main.AdminMenu;
-import com.societyManagement.main.GuardMenu;
-import com.societyManagement.main.ResidentMenu;
-import com.util.FileLogging;
 import com.util.Helper;
-import com.util.PrintInTable;
 import com.util.str;
 import com.serviceInterface.UserServiceInterface;
 
@@ -105,37 +97,11 @@ public class UserController {
 	}
 
 	public void viewUser(String idUser) throws SQLException, ClassNotFoundException {
-		User user =  userService.getUserByUserName(idUser);
-		if (user != null) {
-			System.out.println("-----------------------------------------------------");
-			System.out.printf("| %-15s | %-30s |\n", "Field", "Value");
-			System.out.println("-----------------------------------------------------");
-
-			System.out.printf("| %-15s | %-30s |\n", "User Name", user.getUserName());
-			System.out.printf("| %-15s | %-30s |\n", "User Role", user.getUserRole());
-			System.out.printf("| %-15s | %-30s |\n", "Phone No", user.getPhoneNo());
-			System.out.printf("| %-15s | %-30s |\n", "Email", user.getEmail());
-			System.out.printf("| %-15s | %-30s |\n", "Address", user.getAddress());
-
-			System.out.println("------------------------------------------------------");
-		} else {
-			System.out.println(str.userNotFound);
-		}
-
+		 userService.getUserByUserName(idUser);
 	}
 
 	public void listUsers() throws SQLException, ClassNotFoundException {
-		List<User> users=userService.getAllUsers();
-		if (users == null || users.isEmpty()) {
-			System.out.println(str.userNotFound);
-			return ;
-		}
-		else
-		{
-		List<String> headers= Arrays.asList( "S.No", "User Name","User Role", "Phone No","Email","Address");
-		List<String> fields= Arrays.asList(  "userName", "userRole", "phoneNo", "email","address");
-		PrintInTable.printTable(users, headers, fields);
-		}
+		userService.getAllUsers();	
 	}
 
 	public void updateUser(User user) throws SQLException, ClassNotFoundException {
@@ -230,16 +196,8 @@ public class UserController {
 
 	}
 
-	public void deleteUser(User user) throws SQLException, ClassNotFoundException {
-		if (user.getUserRole().toLowerCase().equals(str.admin)) {
-			System.out.println(str.NoadminDeletion);
-			return;
-		}
-
-		else {
-			userService.deleteUser(user);
-			System.out.println(str.UserdeletedSuccessfully);
-		}
+	public static  void deleteUser(User user) throws SQLException, ClassNotFoundException {
+		userService.deleteUser(user);
 	}
 
 	public static void login() throws SQLException, ClassNotFoundException, InterruptedException {
@@ -247,42 +205,17 @@ public class UserController {
 		try {
 
 			System.out.println(str.enterLoginDeatils);
-			System.out.print(str.enterUserName);
+			System.out.println(str.enterUserName);
+			
+			Console consoleObject= System.console();
 
 			String userName = scanner.nextLine().trim();
 			System.out.println(str.enterPassword);
 
-			String password = scanner.nextLine().trim();
-			User user= userService.login(userName, password);
-
-
-			 if (user == null ) {
-
-	        	 System.out.println(str.invalidUserNameOrPassword);
-		            //logger.warning("Failed login attempt for username: " + userName);
-
-
-	        } else {
-	        	System.out.println( str.loginSuccessful+ user.getUserName() + ".");
-	           // logger.info("User logged in: " + user.getUserName());
-
-
-	            if(user.getUserRole().toLowerCase().equals(str.resident))
-	            {
-	            	ResidentMenu obj= new ResidentMenu();
-
-	            	obj.displayMenu(user);
-	            }
-	            else if(user.getUserRole().toLowerCase().equals(str.guard)) {
-	            	GuardMenu guardMenu =new GuardMenu();
-	            	guardMenu.displayMenu(user);
-	            }
-	            else
-	            {
-	            	AdminMenu adminMenuObj= new AdminMenu();
-	            	adminMenuObj.displayMenu(user);
-	            }
-	        }
+			char[] ch= consoleObject.readPassword();
+			String password= String.valueOf(ch);
+			//String password = scanner.nextLine().trim();
+			userService.login(userName, password);
 
 		} catch (SQLException e) {
 			//logger.log(Level.SEVERE, "Login failed due to a database error", e);
@@ -290,34 +223,8 @@ public class UserController {
 
 	}
 
-	public static  User getUsernameList() throws ClassNotFoundException, SQLException {
-		List<User> users = userService.getAllUsers();
-		List<User> userOfResident= new ArrayList<>();
-		int serialNumber=1;
-		if (users == null || users.isEmpty()) {
-			System.out.println(str.userNotFound);
-			return null;
-		} else {
-//			List<String> headers= Arrays.asList( "S.No", "User Name");
-//			List<String> fields= Arrays.asList(  "userName");
-//			PrintInTable.printTable(users, headers, fields);
-//
-			System.out.printf("| %-5s | %-20s |\n", "S.No", "Username");
-			System.out.println("|-------|----------------------|");
-
-			for (User user : users) {
-				if(user.getUserRole().equals("resident"))
-				{
-					userOfResident.add(user);
-					System.out.printf("| %-5d | %-20s |\n", serialNumber++, user.getUserName());
-				}
-
-			}
-			System.out.println("|-------|----------------------|");
-		}
-		int choice = Helper.choiceInput(serialNumber);
-		User selectedUser = userOfResident.get(choice - 1);
-		return selectedUser;
+	public  static User getUsernameList() throws ClassNotFoundException, SQLException {
+		return userService.getUsernameList();
 	}
 
 	public User getUserByadmin() throws ClassNotFoundException, SQLException {

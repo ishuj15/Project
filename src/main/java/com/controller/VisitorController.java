@@ -105,18 +105,7 @@ public class VisitorController {
 	}
 
 	public void viewVisitor(String userId) throws SQLException, ClassNotFoundException {
-
-		List<Visitor> visitors = visitorService.getVisitorById(userId);
-		if (visitors == null || visitors.isEmpty()) {
-			System.out.println(str.visitorNotFound);
-			return;
-		} else {
-
-			List<String> headers=  Arrays.asList("S.No", "Name", "Contact", "Purpose","Arrival Date", "Arrival Time", "Departure Date",  "Departure Time","Approval Req");
-			List<String> fields = Arrays.asList("name","contactNo","purpose","Arrival date","arrivalTime","departure date","departureTime","Status");
-			PrintInTable.printTable(visitors, headers,fields);
-		}
-
+		 visitorService.getAllVisitorsByUserId(userId);
 	}
 
 	public void listVisitors() throws SQLException, ClassNotFoundException {
@@ -151,7 +140,7 @@ public class VisitorController {
 
 	public void updateVisitor(String userId) throws SQLException, ClassNotFoundException {
 		Date date = new Date(System.currentTimeMillis());
-		List<Visitor> visitors = visitorService.getVisitorById(userId);
+		List<Visitor> visitors = visitorService.getAllVisitorsByUserId(userId);
 		if (visitors == null || visitors.isEmpty()) {
 			System.out.println(str.visitorNotFound);
 			return;
@@ -248,7 +237,7 @@ public class VisitorController {
 
 	public void deleteVisitor(String userId) throws SQLException, ClassNotFoundException {
 
-		List<Visitor> visitors = visitorService.getVisitorById(userId);
+		List<Visitor> visitors = visitorService.getAllVisitorsByUserId(userId);
 		if (visitors == null || visitors.isEmpty()) {
 			System.out.println(str.whichVisitorToDelete);
 			return;
@@ -264,7 +253,7 @@ public class VisitorController {
 	}
 	public void verifyVisitor(User user) throws SQLException, ClassNotFoundException {
 
-		List<Visitor> visitors = visitorService.getVisitorById(user.getIdUser());
+		List<Visitor> visitors = visitorService.getAllVisitorsByUserId(user.getIdUser());
 		if (visitors == null || visitors.isEmpty()) {
 			System.out.println(str.visitorNotFound);
 			return;
@@ -280,35 +269,8 @@ public class VisitorController {
 	}
 
 	public void getAllPendingReq(String userId) throws SQLException, ClassNotFoundException {
-		 List<Visitor> visitors =visitorService.getAllPendingReq(userId, str.pending);
-			if (visitors == null || visitors.isEmpty()) {
-				System.out.println(str.visitorNotFound);
-				return;
-			} else {
-
-				List<String> headers=  Arrays.asList("S.No", "Name", "Contact","Purpose","Arrival Date",  "Arrival Time",  "Departure Date","Departure Time", "Approval Req");
-				List<String> fields = Arrays.asList("name","contactNo","purpose","Arrival date","arrivalTime","departure date","departureTime","Status");
-				PrintInTable.printTable(visitors, headers,fields);
-				System.out.println(str.selectToDenyOrApprove);
-
-				int choice = Helper.choiceInput(visitors.size());
-
-				Visitor selectedVisitor = visitors.get(choice - 1);
-				String visitorId = selectedVisitor.getIdVisitor();
-
-				System.out.println(str.selectToApprove);
-				System.out.println(str.selectToDeny);
-
-					int choice2 = Helper.choiceInput(2);
-
-				if (choice2 == 1) {
-					visitorService.updateVisitor(visitorId, "approvalReq",str.approved );
-					System.out.println(str.requestApproved);
-				} else {
-					visitorService.updateVisitor(visitorId, "approvalReq",str.rejected );
-					System.out.println(str.requestDenied);
-				}
-			}
+		 visitorService.getAllPendingReq(userId, str.pending);
+			
 	}
 	public void deleteVisitorByAdmin() throws ClassNotFoundException, SQLException {
 

@@ -26,7 +26,7 @@ public class AlertMenu {
 
 			switch (choice) {
 			case 1: {
-				alertController.viewAlertByRole(user.getUserRole());
+				alertController.listAlerts(user.getUserRole());
 				break;
 			}
 			case 2:

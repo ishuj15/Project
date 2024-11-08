@@ -69,7 +69,7 @@ class ComplaintServiceTest {
 	{
 		String idComplaint="123";
 		when(complaintDao.deleteComplaint(idComplaint)).thenReturn(true);
-		complaintServiceObj.deleteComplaint(idComplaint);
+		//complaintServiceObj.deleteComplaint();
 		verify(complaintDao, times(1)).deleteComplaint(idComplaint);
 
 	}

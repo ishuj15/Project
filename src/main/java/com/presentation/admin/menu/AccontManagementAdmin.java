@@ -24,8 +24,6 @@ public class AccontManagementAdmin {
 			Helper.printFunction(str.accountManagementAdmin);
 
 				int choice= Helper.choiceInput(8);
-
-
 			switch (choice) {
 			case 1: {
 				UserController.createUser();

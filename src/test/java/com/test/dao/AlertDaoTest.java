@@ -141,16 +141,16 @@ public class AlertDaoTest {
         assertEquals("1", result.get(0).getIdAlert());
         assertEquals("2", result.get(1).getIdAlert());
     }
-//    @Test
-//    public void testGetAllAlertsFailure() throws SQLException {
-//        when(preparedStatement.executeQuery()).thenThrow(new SQLException("Database error"));
-//
-//        Exception exception = assertThrows(SQLException.class, () -> {
-//            alertDAO.getAllAlerts();
-//        });
-//
-//        assertEquals("Database error", exception.getMessage());
-//    } 
+    @Test
+    public void testGetAllAlertsFailure() throws SQLException {
+        when(preparedStatement.executeQuery()).thenThrow(new SQLException("Database error"));
+
+        Exception exception = assertThrows(SQLException.class, () -> {
+            alertDAO.getAllAlerts();
+        });
+
+        assertEquals("Database error", exception.getMessage());
+  } 
 
     @Test
     public void testUpdateAlertSuccess() throws SQLException, ClassNotFoundException {

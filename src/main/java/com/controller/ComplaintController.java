@@ -44,49 +44,16 @@ public class ComplaintController {
 	}
 
 	public void viewComplaint(User user) throws SQLException, ClassNotFoundException {
-		 List<Complaint> complaints = complaintService.getComplaintsById(user.getIdUser());
-		 if(complaints.equals(null) || complaints.isEmpty())
-		 {
-			 System.out.println(str.complaintNotFound);
-			 return;
-		 }
-		 else
-		 {
-			 List<String> headers= Arrays.asList("S.No","Description", "Status", "Date");
-				List<String> fields= Arrays.asList("description", "status", "date");
-				PrintInTable.printTable(complaints, headers, fields);
-	}
+		complaintService.getComplaintsById(user.getIdUser());
 	}
 	public void listComplaints() throws SQLException, ClassNotFoundException {
-		List<Complaint> complaints = complaintService.getAllComplaints();
-		if (complaints.isEmpty()) {
-			System.out.println(str.complaintNotFound);
-			return ;
-		} else {
-			List<String> headers= Arrays.asList("S.No","Description", "Status", "Date");
-			List<String> fields= Arrays.asList("description", "status", "date");
-			PrintInTable.printTable(complaints, headers, fields);
-//			System.out.printf("%-5s %-15s %-20s %-15s %-15s%n", "No.", , );
-//			System.out.println("---------------------------------------------------------------------------------");
-//
-//			int serialNumber = 1;
-//			for (Complaint complaint : complaints) {
-//
-//				User user = UserController.userService.getUserById(complaint.getUserId());
-//
-//				System.out.printf("%-5d %-15s %-20s %-15s %-15s%n", serialNumber++, complaint.getDescription(),
-//						complaint.getStatus(), complaint.getDate().toString(),
-//						user.getUserName());
-//				System.out.println("---------------------------------------------------------------------------------");
-//			}
-
-		}
+		complaintService.getAllComplaints();
 	}
 
 	public void updateComplaint() throws SQLException, ClassNotFoundException {
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		Complaint complaint = getComplaint();
+		Complaint complaint = complaintService.getComplaint();
 		if (complaint == null)
 		{
 			System.out.println(str.complaintNotFound);
@@ -131,43 +98,10 @@ public class ComplaintController {
 			}
 		}
 	}
-	public void deleteComplaint(String userId) throws SQLException, ClassNotFoundException {
-		List<Complaint> complaints = complaintService.getComplaintsById(userId);
-		 if(complaints.equals(null) || complaints.isEmpty())
-		 {
-			 System.out.println(str.complaintNotFound);
-			 return;
-		 }
-		 else
-		 {
-		System.out.println(str.complaintToBeDeleted);
-		listComplaints();
-		int choice =  Helper.choiceInput(complaints.size());
-		Complaint selectedComplaint = complaints.get(choice - 1);
-		String idComplaint = selectedComplaint.getIdComplaint();
-		complaintService.deleteComplaint(idComplaint);
-		System.out.println(str.complaintDeleted);
-	}
-	}
-	public Complaint getComplaint() throws ClassNotFoundException, SQLException {
-		List<Complaint> complaints = complaintService.getAllComplaints();
-		 if(complaints.equals(null) || complaints.isEmpty())
-		 {
-			 System.out.println(str.complaintNotFound);
-			 return null;
-		 }
-		 else
-		 {
-		listComplaints();
-		System.out.println(str.selectComplaint);
-		int choice = Helper.choiceInput(complaints.size());
-		return complaints.get(choice - 1);
-		 }
-		 }
 
 	public void deleteComplaintAdmin() throws SQLException, ClassNotFoundException {
-		Complaint complaint = getComplaint();
-		complaintService.deleteComplaint(complaint.getIdComplaint());
+		
+		complaintService.deleteComplaint();
 		System.out.println(str.complaintDeleted);
 	}
 }

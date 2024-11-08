@@ -7,7 +7,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>societyManage</name>
+  <name>societyManage2.0</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -54,4 +54,17 @@
 			<version>8.0.32</version>
 		</dependency>
   </dependencies>
+  <build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.4.1</version>
+				<configuration>
+					<mainClass>com.societyManagement.main.Main</mainClass>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 </project>

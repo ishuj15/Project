@@ -39,30 +39,12 @@ public class ServicesController {
 
 	public void viewService(String idUser) throws SQLException, ClassNotFoundException {
 
-	 	List<Services> services = servicesService.getServiceById(idUser);
-		if (services.isEmpty() || services==null) {
-			System.out.println(str.serviceNotFound);
-		return;}
-		else {
-			List<String> headers= Arrays.asList( "S.No", "Service Name","Description", "Status");
-			List<String> fields= Arrays.asList(  "serviceName", "description", "status");
-			PrintInTable.printTable(services, headers, fields);
-
-		}
+		 servicesService.getServiceById(idUser);
 	}
 
 	public void listServices() throws SQLException, ClassNotFoundException {
-		List<Services> services = servicesService.getAllServices();
-		if ( services.isEmpty() ||services.equals(null)) {
-			System.out.println(str.serviceNotFound);
-			return;
-		}
-		else {
-			List<String> headers= Arrays.asList( "S.No", "Service Name","Description", "Status");
-			List<String> fields= Arrays.asList(  "serviceName", "description", "status");
-			PrintInTable.printTable(services, headers, fields);
-
-		}
+		 servicesService.getAllServices();
+		
 	}
 
 	public void updateService(String idUser) throws SQLException, ClassNotFoundException {
@@ -143,7 +125,7 @@ public class ServicesController {
 	}
 
 	public void deleteServiceByAdmin() throws SQLException, ClassNotFoundException {
-		Services service = getService();
+		Services service = servicesService.getService();
 		if (service.equals(null))
 		{
 			System.out.println(str.serviceNotFound);
@@ -156,19 +138,5 @@ public class ServicesController {
 		}
 	}
 
-	public Services getService() throws ClassNotFoundException, SQLException {
-		List<Services> services = servicesService.getAllServices();
-		if (services.equals(null))
-		{
-			System.out.println(str.serviceNotFound);
-			return null;
-		}
-		else
-		{
-		listServices();
-		System.out.println(str.selectService);
-			int choice = Helper.choiceInput(services.size());
-		return services.get(choice - 1);
-		}
-	}
+	
 }
