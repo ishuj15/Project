@@ -44,12 +44,20 @@ public class ComplaintController {
 	}
 
 	public void viewComplaint(User user) throws SQLException, ClassNotFoundException {
-		complaintService.getComplaintsById(user.getIdUser());
+		 List<Complaint> complaints = complaintService.getComplaintsById(user.getIdUser());
+		 if(complaints.equals(null) || complaints.isEmpty())
+		 {
+			 System.out.println(str.complaintNotFound);
+			 return;
+		 }
+		 else
+		 {
+			 List<String> headers= Arrays.asList("S.No","Description", "Status", "Date");
+				List<String> fields= Arrays.asList("description", "status", "date");
+				PrintInTable.printTable(complaints, headers, fields);
+	}
 	}
 	public void listComplaints() throws SQLException, ClassNotFoundException {
-<<<<<<< HEAD
-		complaintService.getAllComplaints();
-=======
 		List<Complaint> complaints = complaintService.listComplaints();
 		if (complaints.isEmpty()) {
 			System.out.println(str.complaintNotFound);
@@ -73,13 +81,12 @@ public class ComplaintController {
 //			}
 
 		}
->>>>>>> ac87088cf150d40ca3353aac3d1ea1f36ac98ad6
 	}
 
 	public void updateComplaint() throws SQLException, ClassNotFoundException {
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		Complaint complaint = complaintService.getComplaint();
+		Complaint complaint = getComplaint();
 		if (complaint == null)
 		{
 			System.out.println(str.complaintNotFound);
@@ -124,8 +131,6 @@ public class ComplaintController {
 			}
 		}
 	}
-<<<<<<< HEAD
-=======
 	public void deleteComplaint(String userId) throws SQLException, ClassNotFoundException {
 		List<Complaint> complaints = complaintService.getComplaintsById(userId);
 		 if(complaints.equals(null) || complaints.isEmpty())
@@ -159,11 +164,10 @@ public class ComplaintController {
 		return complaints.get(choice - 1);
 		 }
 		 }
->>>>>>> ac87088cf150d40ca3353aac3d1ea1f36ac98ad6
 
 	public void deleteComplaintAdmin() throws SQLException, ClassNotFoundException {
-		
-		complaintService.deleteComplaint();
+		Complaint complaint = getComplaint();
+		complaintService.deleteComplaint(complaint.getIdComplaint());
 		System.out.println(str.complaintDeleted);
 	}
 }

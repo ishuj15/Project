@@ -21,27 +21,12 @@ public class ResidentMenu {
 	public void displayMenu(User user) throws SQLException, ClassNotFoundException, InterruptedException {
 		boolean loggedIn = true;
 		Thread thread= new Thread(new MovingAlertThread());
-<<<<<<< HEAD
-
-		while (true) {
-			Helper.printFunction(str.residentMenu);
-
-			//scanner.nextLine();
-			thread.start();
-			System.out.println("");
-			
-
-				int choice= Helper.choiceInput(8);
-				thread.interrupt();
-
-=======
 		thread.start();
 
 		while (true) {
 			Helper.printFunction(str.residentMenu);
 				int choice= Helper.choiceInput(8);
 				thread.interrupt();
->>>>>>> ac87088cf150d40ca3353aac3d1ea1f36ac98ad6
 
 			switch (choice) {
 			case 1: {

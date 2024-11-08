@@ -50,21 +50,38 @@ public class AlertController {
 		alert.setDate(java.sql.Date.valueOf(dateStr));
 		alert.setTargetRole(targetRole);
 		alertService.addAlert(alert);
+		Helper.printFunction(str.alertCreatedSuccessfully);
 	}
 
-	public void listAlerts(String role) throws SQLException, ClassNotFoundException {
-		alertService.listAlerts(role);
+	public void viewAlertByRole(String role) throws SQLException, ClassNotFoundException {
+		List<Alert> alerts = alertService.getAlertByRole(role);
+
+		if (alerts == null || alerts.isEmpty()) {
+			System.out.println(str.alertNotFound);
+			return ;
+
+		} else {
+			List<String> headers=  Arrays.asList("S.No",  "Message","Date");
+			List<String> fields = Arrays.asList("Message","date");
+			PrintInTable.printTable(alerts, headers,fields);
+		}
 	}
 
 	public void listAlerts() throws SQLException, ClassNotFoundException {
-		 alertService.listAlerts();
-			}
-	public void deleteAlert() throws SQLException, ClassNotFoundException {
-		alertService.deleteAlert();
+		List<Alert> alerts = alertService.getAllAlerts();
+
+		if (alerts == null || alerts.isEmpty()) {
+			System.out.println(str.alertNotFound);
+			return;
+		} else {
+			List<String> headers=  Arrays.asList("S.No", "Role", "Message","Date");
+			List<String> fields = Arrays.asList("Message","targetRole","date");
+			PrintInTable.printTable(alerts, headers,fields);
+		}
 	}
 	public void updateAlert() throws SQLException, ClassNotFoundException {
 
-			Alert alert = alertService.getAlert();
+			Alert alert = getAlert();
 			if (alert == null) {
 				System.out.println(str.alertNotFound);
 				scanner.close();
@@ -127,7 +144,35 @@ public class AlertController {
 		}
 	}
 
+	public void deleteAlert() throws SQLException, ClassNotFoundException {
+		Alert alert = getAlert();
+		if (alert == null) {
+			System.out.println(str.alertNotFound);
+			return ;
+		}
+		else
+		{
+		alertService.deleteAlert(alert.getIdAlert());
+		System.out.println(str.alertDeleted);
+		}
+	}
 
+	public Alert getAlert() throws ClassNotFoundException, SQLException {
 
-	
+		List<Alert> alerts = alertService.getAllAlerts();
+		if (alerts == null) {
+			System.out.println(str.alertNotFound);
+			return null;
+		}
+		else
+		{
+		listAlerts();
+		System.out.println(str.selectAlert);
+		while (true) {
+			int choice = Helper.choiceInput(alerts.size());
+			return alerts.get(choice - 1);
+
+		}
+		}
+	}
 }

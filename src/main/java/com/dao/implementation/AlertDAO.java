@@ -1,6 +1,6 @@
 package com.dao.implementation;
 
-import java.sql.ResultSet; 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 

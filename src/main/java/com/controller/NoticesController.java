@@ -67,16 +67,33 @@ public class NoticesController {
 	}
 
 	public void listNotices(String role) throws SQLException, ClassNotFoundException {
-		 noticesService.getNoticeByRole(role);
+		List<Notices> notices = noticesService.getNoticeByRole(role);
 
+		if (notices == null || notices.isEmpty()) {
+			System.out.println(str.noticeNotFound);
+			return;
+		} else {
+			List<String> headers= Arrays.asList( "S.No", "Title", "Message", "Date");
+			List<String> fields= Arrays.asList(  "title", "message", "date");
+			PrintInTable.printTable(notices, headers, fields);
+		}
 	}
 
 	public void listNotices() throws SQLException, ClassNotFoundException {
-		 noticesService.getAllNotices();
+		List<Notices> notices = noticesService.getAllNotices();
+
+		if (notices == null || notices.isEmpty()) {
+			System.out.println(str.noticeNotFound);
+			return;
+		} else {
+			List<String> headers= Arrays.asList( "S.No", "Title", "Message", "Date", "Role");
+			List<String> fields= Arrays.asList(  "title", "message", "date", "targetRole");
+			PrintInTable.printTable(notices, headers, fields);
+		}
 	}
 
 	public void updateNotice() throws SQLException, ClassNotFoundException {
-		Notices notice = noticesService.getNotice();
+		Notices notice = getNotice();
 
 		if (notice == null)
 		{
@@ -152,8 +169,35 @@ public class NoticesController {
 		}
 	}
 	public void deleteNotice() throws SQLException, ClassNotFoundException {
-		noticesService.deleteNotice();
+		Notices notice = getNotice();
+		if( notice==null)
+		{
+			System.out.println(str.noticeNotFound);
 
+			return ;
+		}
+		else
+		{
+		noticesService.deleteNotice(notice.getIdNotices());
+		System.out.println(str.noticeDeleteSuccessfully);
 	}
-	
+	}
+	public Notices getNotice() throws ClassNotFoundException, SQLException {
+
+		List<Notices> notices = noticesService.getAllNotices();
+		if(notices.isEmpty()|| notices.equals(null))
+		{
+			System.out.println(str.noticeNotFound);
+
+			return null;
+		}
+		else
+		{
+		listNotices();
+		System.out.println(str.selectNotice);
+		int choice = Helper.choiceInput(notices.size());
+
+		return notices.get(choice - 1);
+		}
+	}
 }

@@ -54,7 +54,7 @@ class VisitorServiceTest {
 		String userID="123";
 		List<Visitor> expected=null;
 		when(visitorDao.getVisitorById(userID)).thenReturn(expected);
-		List<Visitor> actual= visitorServiceObj.getAllVisitorsByUserId(userID);
+		List<Visitor> actual= visitorServiceObj.getVisitorById(userID);
 		assertEquals(expected,actual);
 		verify(visitorDao, times(1)).getVisitorById(userID);
 	}
@@ -94,9 +94,9 @@ class VisitorServiceTest {
 		String approvalReq="Pending";
 		List<Visitor> expected=null;
 		when(visitorDao.getAllpendingRequests(userId, approvalReq)).thenReturn(expected);
-//		List<Visitor> actual = visitorServiceObj.getAllPendingReq(userId, approvalReq);
-//		assertEquals(expected,actual);
-//		verify(visitorDao,times(1)).getAllpendingRequests(userId, approvalReq);
+		List<Visitor> actual = visitorServiceObj.getAllPendingReq(userId, approvalReq);
+		assertEquals(expected,actual);
+		verify(visitorDao,times(1)).getAllpendingRequests(userId, approvalReq);
 	}
 
 

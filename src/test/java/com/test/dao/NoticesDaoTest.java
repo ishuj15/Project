@@ -84,7 +84,7 @@ public class NoticesDaoTest {
     @Test
     public void testGetNoticeByRoleSuccess() throws SQLException, ClassNotFoundException {
         when(resultSet.next()).thenReturn(true).thenReturn(false);
-        when(resultSet.getString("idNotices")).thenReturn("1");
+        when(resultSet.getString("IdNotices")).thenReturn("1");
         when(resultSet.getString("title")).thenReturn("Notice Title");
         when(resultSet.getString("message")).thenReturn("Notice Message");
         when(resultSet.getString("date")).thenReturn("2024-09-12");
@@ -130,7 +130,7 @@ public class NoticesDaoTest {
     public void testGetAllNoticesSuccess() throws SQLException, ClassNotFoundException {
         when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(false);
 
-        when(resultSet.getString("idNotices")).thenReturn("1").thenReturn("2");
+        when(resultSet.getString("IdNotices")).thenReturn("1").thenReturn("2");
         when(resultSet.getString("title")).thenReturn("Notice Title").thenReturn("Another Notice");
         when(resultSet.getString("message")).thenReturn("Notice Message").thenReturn("Another Message");
         when(resultSet.getString("date")).thenReturn("2024-09-12").thenReturn("2024-09-13");

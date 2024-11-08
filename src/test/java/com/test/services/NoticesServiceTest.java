@@ -68,7 +68,7 @@ public class NoticesServiceTest {
 	public void deleteNoticeTest() throws ClassNotFoundException, SQLException {
 		String noticeId="123";
 		when(noticesDao.deleteNotice(noticeId)).thenReturn(true);
-	//	noticeServiceObj.deleteNotice();
+		noticeServiceObj.deleteNotice(noticeId);
 		verify(noticesDao, times(1)).deleteNotice(noticeId);
 	}
 

@@ -126,14 +126,14 @@ public class str {
 	public static String  enterComplaintDescription="Enter complaint description: ";
 	public static String enterCurrentStatus= "Enter current status(available or not availablle) " ;
 	public static String  enterEmail=  "Enter email: ";
-	public static String enterLoginDeatils = "Enter your login details:  " ;
+	public static String enterLoginDeatils = "Enter your login details:" ;
 	public static String enterPassword = "Enter password: " ;
 	public static String enterPhoneNo = "Enter phone number: ";
 	public static String enterRole= "Enter user role (resident,guard): ";
 	public static String enterServiceDescription = "Enter service description: " ;
 	public static String enterServiceName = "Enter service name: ";
 	public static String enterStatus= "Enter status: ";
-	public static String enterUserName= "Enter user name :";
+	public static String enterUserName= "Enter user name";
 	public static String exit = "Exit";
 	public static String guard= "guard";
 	public static String guardVisitorMenu="""

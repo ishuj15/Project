@@ -63,8 +63,8 @@ class ServicesServiceTest {
 	{
 		List<Services> expected=null;
 		when(servicesDao.getAllServices()).thenReturn(expected);
-		servicesServiceObj.getAllServices();
-		//assertEquals(expected,actual);
+		List<Services> actual= servicesServiceObj.getAllServices();
+		assertEquals(expected,actual);
 		verify(servicesDao, times(1)).getAllServices();
 	}
 	@Test
