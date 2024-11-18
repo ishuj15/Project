@@ -21,7 +21,7 @@ public class UserService implements UserServiceInterface {
 	public void addUser(User user) throws SQLException, ClassNotFoundException {
 		userDAO.addUser(user);
 	}
-
+//hi
 	public User getUserByUserName(String userName) throws SQLException, ClassNotFoundException {
 		User user=userDAO.getUserByUserName(userName);
 			return user;
